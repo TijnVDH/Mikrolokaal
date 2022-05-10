@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1045 &1
+EditorBuildSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Scenes:
+  - enabled: 1
+    path: Assets/GSL_Scenes/Game.unity
+    guid: 766d0a6d8b2f2c541b137a594c2d3af2
+  - enabled: 0
+    path: Assets/GSL_Scenes/Debug Scenes/2021-05-10_MP-Debug.unity
+    guid: 0f53bec07cfeca542866e727a63b0b8b
+  - enabled: 0
+    path: Assets/GSL_Scenes/Berry_Dev.unity
+    guid: d6b070fce6804524c8cf092701328ef7
+  - enabled: 0
+    path: Assets/GSL_Scenes/Menno_Dev.unity
+    guid: c05e20712430343658e8752091aec3f4
+  m_configObjects: {}
