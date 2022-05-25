@@ -33,7 +33,7 @@ public class NPCSpawner : NetworkBehaviour
 		{
             // enhance virus strength
             spawnedNpc.GetComponent<Character>().RpcUpgrade(UpgradeType.ATTACK);
-		}
+        }
 
         spawnedObjects.Add(spawnedNpc);
 
