@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class LoadCircle : MonoBehaviour
 {
-    void Update()
+    private void FixedUpdate()
     {
         gameObject.transform.Rotate(0, 0, -1);
     }
