@@ -609,8 +609,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Image: {fileID: 8409790633899242249}
-  DefaultSprite: {fileID: 21300000, guid: f70e031a7ba5eb24a9fef46de3463eb7, type: 3}
-  ToggledSprite: {fileID: 21300000, guid: 7b634d0dd4bdc2b45a652e36f154d803, type: 3}
+  DefaultSprite: {fileID: 21300000, guid: f09dd13c484c33f4d8f3ebd0ad4922c9, type: 3}
+  ToggledSprite: {fileID: 21300000, guid: 9636aeaf2df3b124989a5579dfbc1387, type: 3}
 --- !u!1 &3319532253601043134
 GameObject:
   m_ObjectHideFlags: 0
