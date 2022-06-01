@@ -85,13 +85,13 @@ public class Character : NetworkBehaviour
 
         if (Movement != null)
         {
-            /* Movement.OnStartMoving += StartWobble;
+            Movement.OnStartMoving += StartWobble;
             Movement.OnStopMoving += StopWobble;
-            Movement.OnMove += SetSpriteFacing; */
+            Movement.OnMove += SetSpriteFacing;
         }
         else
         {
-            // StartWobble();
+            StartWobble();
         }
 
         // initialise form

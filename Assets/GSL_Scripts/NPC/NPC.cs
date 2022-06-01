@@ -12,16 +12,15 @@ public class NPC : NetworkBehaviour
 
     public NPCSpawner spawner;
     public NPCPath path;
-
-	private void Awake()
-	{
+    [SerializeField] GameObject animator;
+    private void Awake()
+    {
         path.OnReachedTarget += () =>
         {
             if (!isServer) return;
-
             Debug.Log("Dropping food");
-            RpcDropInventory();
-            FoodInventory.NPCDropAll();
+            animator.GetComponent<Animator>().Play("DropItem");
+            StartCoroutine(DropInventory());
         };
 
         path.OnReachedExit += () =>
@@ -31,7 +30,14 @@ public class NPC : NetworkBehaviour
             RemoveFromSpawner();
             NetworkServer.Destroy(gameObject);
         };
-	}
+    }
+
+    IEnumerator DropInventory()
+    {
+        yield return new WaitForSeconds(2);
+        RpcDropInventory();
+        FoodInventory.NPCDropAll();
+    }
 
     [ClientRpc] private void RpcDropInventory() {
         GetComponent<Character>().ChangeInventorySlots(0);
