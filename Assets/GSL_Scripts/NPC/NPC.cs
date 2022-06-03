@@ -4,6 +4,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
+
 
 public class NPC : NetworkBehaviour
 {
@@ -15,6 +17,10 @@ public class NPC : NetworkBehaviour
     [SerializeField] GameObject animator;
     private void Awake()
     {
+        Animator anim = GetComponent<Animator>();
+        AnimatorStateInfo state = anim.GetCurrentAnimatorStateInfo(0);//could replace 0 by any other animation layer index
+        anim.Play(state.fullPathHash, -1, Random.Range(0f, 1f));
+
         path.OnReachedTarget += () =>
         {
             if (!isServer) return;

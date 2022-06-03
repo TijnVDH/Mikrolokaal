@@ -599,6 +599,11 @@ PrefabInstance:
       propertyPath: animator
       value: 
       objectReference: {fileID: 124633430916625340}
+    - target: {fileID: -708332778737580612, guid: 9b991aa0714d8d14aa90a310e75fcb65,
+        type: 3}
+      propertyPath: destroyer
+      value: 
+      objectReference: {fileID: 554938951314576924}
     - target: {fileID: 708999128655919477, guid: 9b991aa0714d8d14aa90a310e75fcb65,
         type: 3}
       propertyPath: m_AnchorMax.y
