@@ -42,8 +42,11 @@ public class Soup : NetworkBehaviour
 
 	private SoupState CurrentState;
 
+	AudioSource dropSound;
+
 	private void Start()
 	{
+		dropSound = GetComponent<AudioSource>();
 		CurrentState = SoupState.INACTIVE;
 		SoupSprite.sprite = InactiveSoupSprite;
 
@@ -84,36 +87,41 @@ public class Soup : NetworkBehaviour
 	}
 
 	[ClientRpc] public void RpcAddFood(FoodType type, int amount)
-	{
-		if (!RequiredFoodTypes.Contains(type))
-		{
-			Debug.Log("Soup: Food type not accepted");
-			return;
-		}
+    {
+        if (!RequiredFoodTypes.Contains(type))
+        {
+            Debug.Log("Soup: Food type not accepted");
+            return;
+        }
 
-		if (soupContent.ContainsKey(type))
-		{
-			soupContent[type] += amount;
-		}
-		else
-		{
-			soupContent.Add(type, amount);
-		}
+        if (soupContent.ContainsKey(type))
+        {
+            soupContent[type] += amount;
+        }
+        else
+        {
+            soupContent.Add(type, amount);
+        }
 
-		Debug.Log("==SOUP CONTENT==");
-		foreach (KeyValuePair<FoodType, int> foodkvp in soupContent)
-		{
-			Debug.Log(foodkvp.Key + ": " + foodkvp.Value);
-		}
+        Debug.Log("==SOUP CONTENT==");
+        foreach (KeyValuePair<FoodType, int> foodkvp in soupContent)
+        {
+            Debug.Log(foodkvp.Key + ": " + foodkvp.Value);
+        }
 
-		AnimateBubbles();
+        AnimateBubbles();
+        PlayDropSound();
+        UpdateSoupState();
+        UpdateIndicators();
+        if (isServer) UpdateHostIndicators();
+    }
 
-		UpdateSoupState();
-		UpdateIndicators();
-		if (isServer) UpdateHostIndicators();
-	}
+    private void PlayDropSound()
+    {
+		dropSound.PlayDelayed(2);
+    }
 
-	[ClientRpc] public void RpcRemoveFood(FoodType type, int amount)
+    [ClientRpc] public void RpcRemoveFood(FoodType type, int amount)
 	{
 		Debug.Log("soup: removing food " + type);
 		if (soupContent.ContainsKey(type))

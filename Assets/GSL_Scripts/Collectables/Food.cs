@@ -33,6 +33,7 @@ public class Food : NetworkBehaviour
 
     private List<Tween> wobbleTweens = new List<Tween>();
 
+	private AudioSource pickupSound;
 	void Start()
     {
 		if(RandomiseTypeOnStart && isServer)
@@ -44,12 +45,17 @@ public class Food : NetworkBehaviour
 		SetImmune();
 		InitSprite();
 		StartWobble();
+
+		pickupSound = GetComponent<AudioSource>();
 	}
 
 	public void Collect(GameObject collector)
 	{
 		Debug.Log("Food collected");
 		StopWobble();
+
+		//play collect sound
+		pickupSound.Play(0);
 	}
 
 	private void InitSprite()

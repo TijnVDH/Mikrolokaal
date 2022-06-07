@@ -46,4 +46,10 @@ public class NPC : NetworkBehaviour
     {
         spawner.RemoveFromList(this);
     }
+
+    // when the enemy is destroyed
+    private void OnDestroy()
+    {
+        
+    }
 }

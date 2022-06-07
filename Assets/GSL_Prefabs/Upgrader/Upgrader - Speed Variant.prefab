@@ -88,5 +88,25 @@ PrefabInstance:
       propertyPath: UpgradeType
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 8284311368557541362, guid: 9944efbaab9b1944b8f35cd8a86ea26b,
+        type: 3}
+      propertyPath: MaxDistance
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8284311368557541362, guid: 9944efbaab9b1944b8f35cd8a86ea26b,
+        type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: a245ee5d75348c84a89ffb7992f1dc82, type: 3}
+    - target: {fileID: 8284311368557541362, guid: 9944efbaab9b1944b8f35cd8a86ea26b,
+        type: 3}
+      propertyPath: rolloffMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8284311368557541362, guid: 9944efbaab9b1944b8f35cd8a86ea26b,
+        type: 3}
+      propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9944efbaab9b1944b8f35cd8a86ea26b, type: 3}

@@ -50,6 +50,7 @@ public class Character : NetworkBehaviour
     private float defaultSpeed;
     private int defaultSlots;
 
+
     // combat
     private bool isImmune = false;
 

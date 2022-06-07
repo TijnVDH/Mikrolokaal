@@ -12,6 +12,21 @@ PrefabInstance:
       propertyPath: UpgradeType
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4339818650887897241, guid: bef0e6575057db640b54b723b7d7d188,
+        type: 3}
+      propertyPath: MaxDistance
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4339818650887897241, guid: bef0e6575057db640b54b723b7d7d188,
+        type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 21ba4f1a293a2487587068d7bbe15106, type: 3}
+    - target: {fileID: 4339818650887897241, guid: bef0e6575057db640b54b723b7d7d188,
+        type: 3}
+      propertyPath: rolloffMode
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5323516226656275293, guid: bef0e6575057db640b54b723b7d7d188,
         type: 3}
       propertyPath: m_RootOrder
@@ -86,7 +101,7 @@ PrefabInstance:
     - target: {fileID: 9147105301955430391, guid: bef0e6575057db640b54b723b7d7d188,
         type: 3}
       propertyPath: m_Name
-      value: Upgrader - Strength Variant
+      value: Upgrader - Attack Variant
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bef0e6575057db640b54b723b7d7d188, type: 3}
