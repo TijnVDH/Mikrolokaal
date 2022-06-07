@@ -20,7 +20,7 @@ public class QRCodeScanner : MonoBehaviour
     private WebCamTexture _cameraTexture;
 
     [SerializeField]
-    private NetworkWindowView nwv;
+    private TMP_InputField _inputField;
 
     // Start is called before the first frame update
     void OnEnable()
@@ -49,7 +49,7 @@ public class QRCodeScanner : MonoBehaviour
 
         for(int i = 0; i < devices.Length; i++)
         {
-            if (devices[i].isFrontFacing == false)
+            if (devices[i].isFrontFacing == true)
             {
                 _cameraTexture = new WebCamTexture(devices[i].name, (int)_scanZone.rect.width, (int)_scanZone.rect.height);
             }
@@ -82,7 +82,8 @@ public class QRCodeScanner : MonoBehaviour
             if (result != null) 
             {
                 //_textOut.text = result.Text;
-                nwv.JoinGame(result.Text);
+                _inputField.text = result.Text;
+                this.gameObject.SetActive(false);
             }
             //else _textOut.text = "FAILED TO READ QRCODE";
         }

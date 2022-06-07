@@ -22,6 +22,8 @@ public class QRCodeGenerator : MonoBehaviour
     void Start()
     {
         _ip = CL.GetIPv4();
+        string[] _ipv1x4 = _ip.Split('.');
+        _ip = CL.IPv4EncodeToPass(_ipv1x4).ToString("X");
         _storeEncodedTexture = new Texture2D(256, 256);
 
         EncodeTextToQRCode();
