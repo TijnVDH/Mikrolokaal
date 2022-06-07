@@ -197,7 +197,7 @@ Animator:
   m_GameObject: {fileID: 5335588515996600638}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 4a4f6e243abfc6146b9a12f69fd095b1, type: 2}
+  m_Controller: {fileID: 9100000, guid: 224613d347beb01498432cf03fd156e2, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -404,6 +404,21 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 554938951314576915, guid: 9ce9a314120c60e4fa89eb92c1f406db,
         type: 3}
+      propertyPath: WobbleDuration
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 554938951314576915, guid: 9ce9a314120c60e4fa89eb92c1f406db,
+        type: 3}
+      propertyPath: WobbleWidthStrength
+      value: 0.95
+      objectReference: {fileID: 0}
+    - target: {fileID: 554938951314576915, guid: 9ce9a314120c60e4fa89eb92c1f406db,
+        type: 3}
+      propertyPath: WobbleHeightStrength
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 554938951314576915, guid: 9ce9a314120c60e4fa89eb92c1f406db,
+        type: 3}
       propertyPath: forms.Array.data[0].Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 09d81e8e3784bde43ac2ffe679c4c7eb,
@@ -465,6 +480,11 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3770789915136408204, guid: 9ce9a314120c60e4fa89eb92c1f406db,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4275479166141066818, guid: 9ce9a314120c60e4fa89eb92c1f406db,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -524,7 +544,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: 4a4f6e243abfc6146b9a12f69fd095b1, type: 2}
+      objectReference: {fileID: 9100000, guid: 224613d347beb01498432cf03fd156e2, type: 2}
     - target: {fileID: 5246377582436797358, guid: 9ce9a314120c60e4fa89eb92c1f406db,
         type: 3}
       propertyPath: m_ApplyRootMotion

@@ -50,6 +50,9 @@ public class Character : NetworkBehaviour
     private float defaultSpeed;
     private int defaultSlots;
 
+    //[SerializeField] GameObject attackAnimator;
+
+    [SerializeField] Animator animator;
     // combat
     private bool isImmune = false;
 
@@ -117,6 +120,7 @@ public class Character : NetworkBehaviour
         {
             Canvas.FindObjectOfType<InventoryUI>().Init(this);
             InventorySlots = FoodInventory.CurrentSlotsAmount;
+           
         }
 
         if(isServerCharacter) {
@@ -266,6 +270,8 @@ public class Character : NetworkBehaviour
             NPC npc = enemy.GetComponent<NPC>();
             if (npc != null)
             {
+                if (transform.tag == "Player")
+                    animator.Play("attackAnim");
                 npc.RemoveFromSpawner();
             }
             // NetworkServer.Destroy(enemy.gameObject);
@@ -299,6 +305,11 @@ public class Character : NetworkBehaviour
 
     private void ChangeForm()
     {
+        upgradeAnim();
+    }
+
+    private void upgradeAnim()
+    {
         // loop through all forms until you find an eligeable one
         for (int i = 0; i < forms.Count; i++)
         {
@@ -307,6 +318,12 @@ public class Character : NetworkBehaviour
 
             if (ActiveUpgrade == form.UpgradeType)
             {
+                if(transform.tag == "Player")
+                    animator.Play("upgradeAnim");
+                
+                //if(transform.tag == "Player")
+                    //animator.Play("Idle");
+
                 formSpriteRenderer.sprite = form.Sprite;
             }
         }

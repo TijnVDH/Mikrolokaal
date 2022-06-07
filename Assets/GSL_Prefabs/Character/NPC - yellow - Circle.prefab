@@ -412,6 +412,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3832802273911701796, guid: 9b991aa0714d8d14aa90a310e75fcb65,
         type: 3}
+      propertyPath: WobbleDuration
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 3832802273911701796, guid: 9b991aa0714d8d14aa90a310e75fcb65,
+        type: 3}
       propertyPath: forms.Array.data[0].Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 45f3de2eb75064b4bbb295b4e9d0440b,
@@ -522,7 +527,8 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8424694276563884777, guid: 9b991aa0714d8d14aa90a310e75fcb65, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 9b991aa0714d8d14aa90a310e75fcb65, type: 3}
 --- !u!1 &7590335346987591410 stripped
 GameObject:

@@ -682,9 +682,10 @@ GameObject:
   - component: {fileID: 5692425417754195081}
   - component: {fileID: 5360860387321565895}
   - component: {fileID: 4262195855079703532}
+  - component: {fileID: -5426619557577523692}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 3306451490063965843, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -782,6 +783,7 @@ MonoBehaviour:
   UpgradedAttack: 2
   UpgradedSpeed: 14
   UpgradedSlots: 3
+  animator: {fileID: -5426619557577523692}
 --- !u!114 &5610777206590781507
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -860,6 +862,25 @@ MonoBehaviour:
     type: 3}
   SquareFoodPrefab: {fileID: 8864896938511035141, guid: 7e377b90b204dfc40a1272ee233e1aaa,
     type: 3}
+--- !u!95 &-5426619557577523692
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5610777206590781518}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3d7afc04294e0ad4d84951fea87665da, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &5924022675958492345
 GameObject:
   m_ObjectHideFlags: 0
