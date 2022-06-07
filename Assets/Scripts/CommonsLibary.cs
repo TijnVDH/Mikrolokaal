@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using UnityEngine;
 
 public class CommonsLibary
@@ -44,9 +46,22 @@ public class CommonsLibary
 
     public string  PassDecodeToIPv4(string _pass)
     {
-        uint num = uint.Parse(_pass, NumberStyles.AllowHexSpecifier);
-        //long comb = long.Parse(_pass.ToUpper(), NumberStyles.AllowHexSpecifier);
-        Debug.Log(num.ToString());
-        return null;
+        byte[] hexBytes = StringToByteArray(_pass);
+        List<int> values = new List<int>();
+        values.Add((int)hexBytes[0]);
+        values.Add((int)hexBytes[1]);
+        values.Add((int)hexBytes[2]);
+        values.Add((int)hexBytes[3]);
+        string ipv4 = values[0].ToString() + '.' + values[1].ToString() + '.' + values[2].ToString() + '.' + values[3].ToString();
+        Debug.Log(ipv4);
+        return ipv4;
+    }
+
+    public static byte[] StringToByteArray(string hex)
+    {
+        return Enumerable.Range(0, hex.Length-1)
+                         .Where(x => x % 2 == 0)
+                         .Select(x => Convert.ToByte(hex.Substring(x, 2), 16))
+                         .ToArray();
     }
 }

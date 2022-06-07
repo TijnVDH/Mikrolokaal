@@ -11,8 +11,6 @@ public class QRCodeGenerator : MonoBehaviour
 {
     [SerializeField]
     private RawImage _rawImageReceiver;
-    [SerializeField]
-    private TMP_InputField _textInputfield;
 
     private string _ip;
 
