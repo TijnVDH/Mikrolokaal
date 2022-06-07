@@ -70,7 +70,7 @@ public class QRCodeScanner : MonoBehaviour
         _aspectRatioFitter.aspectRatio = ratio;
 
         int orientation = -_cameraTexture.videoRotationAngle;
-        _rawImageBackground.rectTransform.localEulerAngles = new Vector3(0, 0, -orientation);
+        _rawImageBackground.rectTransform.localEulerAngles = new Vector3(0, 0, orientation);
     }
 
     private void Scan()
