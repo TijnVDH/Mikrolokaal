@@ -53255,6 +53255,11 @@ PrefabInstance:
       objectReference: {fileID: 1056201295}
     - target: {fileID: 4918465331196135563, guid: bcb458ccf339d624ca2da8a6ff56d547,
         type: 3}
+      propertyPath: HordeSize
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4918465331196135563, guid: bcb458ccf339d624ca2da8a6ff56d547,
+        type: 3}
       propertyPath: HordeTarget
       value: 
       objectReference: {fileID: 1041989758}
