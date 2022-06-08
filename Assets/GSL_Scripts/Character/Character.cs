@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Mirror;
 using UnityEngine;
+using TMPro;
 
 // Only functions that are used by the player/virus controller
 [RequireComponent(typeof(NetworkTransform))]
@@ -56,6 +57,11 @@ public class Character : NetworkBehaviour
     private List<Tween> wobbleTweens = new List<Tween>();
 
     [SyncVar] private bool isServerCharacter = false;
+
+    [Header("NickNames")]
+    public TMP_Text nickText;
+    public NickName nickName = NickName.Bacteria1;
+    /*[SyncVar]*/ private string currentNickName = "";
 
     public void Awake()
     {
@@ -117,10 +123,14 @@ public class Character : NetworkBehaviour
         {
             Canvas.FindObjectOfType<InventoryUI>().Init(this);
             InventorySlots = FoodInventory.CurrentSlotsAmount;
+            
+            ChangeName("TEST");
         }
 
-        if(isServerCharacter) {
+        if(isServerCharacter) 
+        {
             HideCharacter();
+            nickText.enabled = false;
         }
     }
 
@@ -354,5 +364,23 @@ public class Character : NetworkBehaviour
         isImmune = false;
         blinkTween.Kill();
         formSpriteRenderer.DOFade(1, 0);
+    }
+
+
+    void ChangeName(string name)
+    {
+        currentNickName = name;
+        nickText.text = currentNickName;
+    }
+
+    [Command] void CmdChangeName(string name)
+    {
+        RpcChangeName(name);
+    }
+
+    [ClientRpc] void RpcChangeName(string name)
+    {
+        currentNickName = name;
+        nickText.text = currentNickName;
     }
 }

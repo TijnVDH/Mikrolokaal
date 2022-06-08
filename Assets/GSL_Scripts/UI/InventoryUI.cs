@@ -8,16 +8,18 @@ public class InventoryUI : MonoBehaviour
 {
     public Button DropButton;
     public Character Character;
-
+    public GameObject Joystick;
+    [SerializeField] private GameObject Button;
     public void Init(Character character)
     {
-        if (character.isServer) {
+        if (character.isServer) 
+        {
             Destroy(this.gameObject);
             return;
-        } 
+        }
 
         Character = character;
-
+        Button.SetActive(true);
         DropButton.onClick.AddListener(DropInventory);
     }
 
