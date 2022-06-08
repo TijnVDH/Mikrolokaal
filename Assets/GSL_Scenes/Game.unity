@@ -41706,6 +41706,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 280655692}
     m_Modifications:
+    - target: {fileID: 2806046899222654071, guid: ab5dca173f53f5244a437a668d1c6c5c,
+        type: 3}
+      propertyPath: MaxDistance
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2806046899222654071, guid: ab5dca173f53f5244a437a668d1c6c5c,
+        type: 3}
+      propertyPath: rolloffMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2806046899222654071, guid: ab5dca173f53f5244a437a668d1c6c5c,
+        type: 3}
+      propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4095582972879672246, guid: ab5dca173f53f5244a437a668d1c6c5c,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -45470,7 +45485,7 @@ PrefabInstance:
     - target: {fileID: 3231902641474645456, guid: ee96bd50fe362e8419c7fdf6079cffcb,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
-      value: ToggleMusic
+      value: GamePause
       objectReference: {fileID: 0}
     - target: {fileID: 3319532253601043129, guid: ee96bd50fe362e8419c7fdf6079cffcb,
         type: 3}
