@@ -278,7 +278,7 @@ public class Character : NetworkBehaviour
             {
                 npc.RemoveFromSpawner();
             }
-            // NetworkServer.Destroy(enemy.gameObject);
+            NetworkServer.Destroy(enemy.gameObject);
         }
 
         // Set immune for x seconds
