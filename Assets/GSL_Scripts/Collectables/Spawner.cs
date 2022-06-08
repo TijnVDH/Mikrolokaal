@@ -16,6 +16,7 @@ public class Spawner : NetworkBehaviour
     public event OnObjectSpawnedEvent OnObjectSpawned;
 
     private Coroutine SpawnCoroutine;
+    private bool cooldown;
 
 	private void OnEnable()
 	{
@@ -38,24 +39,35 @@ public class Spawner : NetworkBehaviour
 
     public void Spawn()
 	{
-        // select and instantiate object
-        GameObject spawnPrefab = spawnOptions[Random.Range(0, spawnOptions.Count)];
-
-        // randomise target position;
-        Vector2 direction = Random.insideUnitCircle.normalized;
-        float distance = Random.Range(minDistance, maxDistance);
-        Vector2 position = new Vector2(transform.position.x, transform.position.z) + (distance * direction);
-        Vector3 targetPosition = new Vector3()
+        if(cooldown == false)
         {
-            x = position.x,
-            y = targetY,
-            z = position.y, 
-        };
+            // select and instantiate object
+            GameObject spawnPrefab = spawnOptions[Random.Range(0, spawnOptions.Count)];
 
-        GameObject spawnedObject = Instantiate(spawnPrefab, targetPosition, Quaternion.identity);
+            // randomise target position;
+            Vector2 direction = Random.insideUnitCircle.normalized;
+            float distance = Random.Range(minDistance, maxDistance);
+            Vector2 position = new Vector2(transform.position.x, transform.position.z) + (distance * direction);
+            Vector3 targetPosition = new Vector3()
+            {
+                x = position.x,
+                y = targetY,
+                z = position.y,
+            };
 
-        NetworkServer.Spawn(spawnedObject);
-        OnObjectSpawned?.Invoke(spawnedObject);
+            GameObject spawnedObject = Instantiate(spawnPrefab, targetPosition, Quaternion.identity);
+
+            NetworkServer.Spawn(spawnedObject);
+            OnObjectSpawned?.Invoke(spawnedObject);
+
+            Invoke("ResetCooldown", 3.0f);
+            cooldown = true;
+        }
+    }
+
+    void ResetCooldown()
+    {
+        cooldown = false;
     }
 
     private IEnumerator AutoSpawn()
