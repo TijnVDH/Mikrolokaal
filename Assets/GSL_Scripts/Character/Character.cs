@@ -57,8 +57,11 @@ public class Character : NetworkBehaviour
 
     [SyncVar] private bool isServerCharacter = false;
 
+    ScoreCounter scoreScript;
     public void Awake()
     {
+        scoreScript = GameObject.Find("Text (TMP)").GetComponent<ScoreCounter>();
+
         defaultAttack = AttackStrength;
         defaultSlots = InventorySlots;
         defaultSpeed = MovementSpeed;
@@ -168,6 +171,9 @@ public class Character : NetworkBehaviour
         {
             // ask the server to handle the upgrade
             CmdUpgrade(upgrader.UpgradeType);
+
+            // award upgrade points
+            scoreScript.UpgradePickupPoints();
         }
     }
 

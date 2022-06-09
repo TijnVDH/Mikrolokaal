@@ -42,8 +42,11 @@ public class Soup : NetworkBehaviour
 
 	private SoupState CurrentState;
 
+	ScoreCounter scoreScript;
 	private void Start()
 	{
+		scoreScript = GameObject.Find("Text (TMP)").GetComponent<ScoreCounter>();
+
 		CurrentState = SoupState.INACTIVE;
 		SoupSprite.sprite = InactiveSoupSprite;
 
@@ -94,6 +97,9 @@ public class Soup : NetworkBehaviour
 		if (soupContent.ContainsKey(type))
 		{
 			soupContent[type] += amount;
+
+			// award points
+			scoreScript.ItemDropPoints();
 		}
 		else
 		{

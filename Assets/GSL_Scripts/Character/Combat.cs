@@ -21,9 +21,13 @@ public class Combat : NetworkBehaviour
     private Character character;
     private bool isImmune = false;
 
+    ScoreCounter scoreScript;
+
     private void Start()
     {
         character = GetComponent<Character>();
+
+        scoreScript = GameObject.Find("Text (TMP)").GetComponent<ScoreCounter>();
     }
 
     public void OnCollisionEnter(Collision collision)
@@ -62,6 +66,10 @@ public class Combat : NetworkBehaviour
             if (otherCharacter.CharacterType == CharacterType.Player)
             {
                 // Other is a player, player wins
+
+                // award points
+                scoreScript.EnemyDefeatPoints();
+
                 // This one dies
                 Die();
             }
