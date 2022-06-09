@@ -63,6 +63,7 @@ public class Character : NetworkBehaviour
     public NickName nickName = NickName.Bacteria1;
     /*[SyncVar]*/ private string currentNickName = "";
 
+    [SerializeField] GameObject animator;
     public void Awake()
     {
         defaultAttack = AttackStrength;
@@ -292,6 +293,7 @@ public class Character : NetworkBehaviour
     [ClientRpc]
     public void RpcSetImmune()
     {
+        animator.GetComponent<Animator>().SetTrigger("attack");
         Debug.Log("Immunity");
         StartCoroutine(ImmunityTimer());
     }
