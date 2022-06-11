@@ -43,9 +43,13 @@ public class Soup : NetworkBehaviour
 	private SoupState CurrentState;
 
 	ScoreCounter scoreScript;
+
+	public GameObject pointsPopUpField;
+	PointsPopup pointsScript;
+
 	private void Start()
 	{
-		scoreScript = GameObject.Find("Text (TMP)").GetComponent<ScoreCounter>();
+		scoreScript = GameObject.Find("Score").GetComponent<ScoreCounter>();
 
 		CurrentState = SoupState.INACTIVE;
 		SoupSprite.sprite = InactiveSoupSprite;
@@ -100,6 +104,12 @@ public class Soup : NetworkBehaviour
 
 			// award points
 			scoreScript.ItemDropPoints();
+			// show points
+			Instantiate(pointsPopUpField, new Vector3(0, 0, 0), Quaternion.identity);
+			pointsScript = pointsPopUpField.GetComponent<PointsPopup>();
+			pointsScript.pointsText.text = "+20";
+			
+			
 		}
 		else
 		{

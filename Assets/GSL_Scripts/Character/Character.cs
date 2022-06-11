@@ -60,7 +60,7 @@ public class Character : NetworkBehaviour
     ScoreCounter scoreScript;
     public void Awake()
     {
-        scoreScript = GameObject.Find("Text (TMP)").GetComponent<ScoreCounter>();
+        scoreScript = GameObject.Find("Score").GetComponent<ScoreCounter>();
 
         defaultAttack = AttackStrength;
         defaultSlots = InventorySlots;

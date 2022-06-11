@@ -23,11 +23,13 @@ public class Combat : NetworkBehaviour
 
     ScoreCounter scoreScript;
 
+    public GameObject pointsPopUp;
+    PointsPopup pointsScript;
     private void Start()
     {
         character = GetComponent<Character>();
 
-        scoreScript = GameObject.Find("Text (TMP)").GetComponent<ScoreCounter>();
+        scoreScript = GameObject.Find("Score").GetComponent<ScoreCounter>();
     }
 
     public void OnCollisionEnter(Collision collision)
