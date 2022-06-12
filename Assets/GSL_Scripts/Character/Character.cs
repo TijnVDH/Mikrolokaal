@@ -58,6 +58,10 @@ public class Character : NetworkBehaviour
     [SyncVar] private bool isServerCharacter = false;
 
     ScoreCounter scoreScript;
+
+    public GameObject pointsPopUpField;
+    PointsPopup pointsScript;
+
     public void Awake()
     {
         scoreScript = GameObject.Find("Score").GetComponent<ScoreCounter>();
@@ -174,6 +178,12 @@ public class Character : NetworkBehaviour
 
             // award upgrade points
             scoreScript.UpgradePickupPoints();
+
+            // pop up points
+            Instantiate(pointsPopUpField, new Vector3(0, 0, 0), Quaternion.identity);
+            pointsScript = pointsPopUpField.GetComponent<PointsPopup>();
+            pointsScript.pointsText.text = "+5";
+
         }
     }
 
