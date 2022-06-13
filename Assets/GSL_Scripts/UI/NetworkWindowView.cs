@@ -63,8 +63,11 @@ public class NetworkWindowView : MonoBehaviour
 	/// QR code version
 	/// </summary>
 	/// <param name="_ipv4"></param>
-	public void JoinGame(string _ipv4)
+	public void JoinGame(string _passCode)
 	{
+		string _ipv4 = commonsLibary.PassDecodeToIPv4(_passCode);
+
+		PlayerPrefs.SetString(PLAYER_PREFS_IP, _passCode);
 		Debug.Log("IP INPUT: " + _ipv4);
 		networkManager.networkAddress = _ipv4;
 		Debug.Log("NETWORK ADDRESS: " + _ipv4);
@@ -81,13 +84,13 @@ public class NetworkWindowView : MonoBehaviour
 		QRScanner.SetActive(true);
     }
 
-	private void SetIpText()
-	{
-		//string[] ipSplit = IPManager.GetIP().Split('.');
-		//ipText.text = "Room code: " + ipSplit[ipSplit.Length - 1];
+	//private void SetIpText()
+	//{
+	//	string[] ipSplit = IPManager.GetIP().Split('.');
+	//	ipText.text = "Room code: " + ipSplit[ipSplit.Length - 1];
 
-		ipText.text = "IP: " + IPManager.GetIP();
-	}
+	//	ipText.text = "IP: " + IPManager.GetIP();
+	//}
 
 	private void SetGamePassText()
     {

@@ -14,6 +14,8 @@ public class QRCodeGenerator : MonoBehaviour
 
     private string _ip;
 
+    private const string PLAYER_PREFS_IP = "hostIP";
+
     private CommonsLibary CL = new CommonsLibary();
 
     private Texture2D _storeEncodedTexture;
@@ -27,6 +29,15 @@ public class QRCodeGenerator : MonoBehaviour
         _storeEncodedTexture = new Texture2D(256, 256);
 
         EncodeTextToQRCode();
+    }
+
+    private void Update()
+    {
+        if (PlayerPrefs.HasKey(PLAYER_PREFS_IP) && PlayerPrefs.GetString(PLAYER_PREFS_IP) != "hostIP")
+        {
+            _ip = PlayerPrefs.GetString(PLAYER_PREFS_IP);
+            EncodeTextToQRCode();
+        }
     }
 
     private Color32 [] Encode(string textForEncoding, int width, int height)
