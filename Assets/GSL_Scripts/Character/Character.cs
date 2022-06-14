@@ -318,8 +318,8 @@ public class Character : NetworkBehaviour
 
             if (ActiveUpgrade == form.UpgradeType)
             {
-                if(transform.tag == "Player")
-                    animator.Play("upgradeAnim");
+                //if(transform.tag == "Player")
+                    //animator.Play("upgradeAnim");
                 
                 //if(transform.tag == "Player")
                     //animator.Play("Idle");
