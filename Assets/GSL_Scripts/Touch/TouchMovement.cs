@@ -30,6 +30,7 @@ public class TouchMovement : NetworkBehaviour
             Destroy(playerCam);
             Debug.Log("1");
             enabled = false;
+            return;
         }
 
         character = GetComponent<Character>();

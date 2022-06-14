@@ -15,8 +15,6 @@ public class QRCodeGenerator : NetworkBehaviour
     [SyncVar]
     public string new_ip;
 
-    private string old_ip;
-
     private const string PLAYER_PREFS_IP = "hostIP";
 
     private CommonsLibary CL = new CommonsLibary();
@@ -34,8 +32,6 @@ public class QRCodeGenerator : NetworkBehaviour
         _storeEncodedTexture = new Texture2D(256, 256);
         ipText.text = new_ip;
         EncodeTextToQRCode();
-
-        old_ip = new_ip;
     }
 
     private Color32 [] Encode(string textForEncoding, int width, int height)
@@ -77,6 +73,9 @@ public class QRCodeGenerator : NetworkBehaviour
     [Command(requiresAuthority = false)]
     public void get_ip()
     {
+        new_ip = CL.GetIPv4();
+        string[] _ipv1x4 = new_ip.Split('.');
+        new_ip = CL.IPv4EncodeToPass(_ipv1x4).ToString("X");
         RpcSend_ip(new_ip);
         Debug.Log(new_ip);
     }
