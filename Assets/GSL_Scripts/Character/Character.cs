@@ -359,12 +359,12 @@ public class Character : NetworkBehaviour
     private IEnumerator ImmunityTimer()
     {
         isImmune = true;
-        Tween blinkTween = formSpriteRenderer.DOFade(.5f, BlinkSpeed).SetLoops(-1, LoopType.Yoyo);
+        //Tween blinkTween = formSpriteRenderer.DOFade(.5f, BlinkSpeed).SetLoops(-1, LoopType.Yoyo);
 
         yield return new WaitForSeconds(ImmunityTime);
 
         isImmune = false;
-        blinkTween.Kill();
+        //blinkTween.Kill();
         formSpriteRenderer.DOFade(1, 0);
     }
 
