@@ -32348,6 +32348,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28579c05827fcb842b571b013d598378, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &981534531
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 981534524}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 2730618462
+  serverOnly: 0
+  visible: 0
+  m_AssetId: ee96bd50fe362e8419c7fdf6079cffcb
+  hasSpawned: 0
 --- !u!1 &982338458
 GameObject:
   m_ObjectHideFlags: 0
@@ -34151,6 +34168,12 @@ Transform:
 --- !u!1 &1041989758 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5553633832817660805, guid: ab5dca173f53f5244a437a668d1c6c5c,
+    type: 3}
+  m_PrefabInstance: {fileID: 1298992347}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &1041989759 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 2806046899222654071, guid: ab5dca173f53f5244a437a668d1c6c5c,
     type: 3}
   m_PrefabInstance: {fileID: 1298992347}
   m_PrefabAsset: {fileID: 0}
@@ -40843,7 +40866,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1278897287}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 26, z: -34}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1149240053}
@@ -40861,18 +40884,18 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: ac2175455ad343949a8cd9b3630a601c, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.208
+  m_Volume: 0.149
   m_Pitch: 1
   Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 172
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
+  Priority: 0
+  DopplerLevel: 0
+  MinDistance: 4.9504952
+  MaxDistance: 5
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 1
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -40905,7 +40928,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -40935,7 +40958,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 1
+      value: 1.1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -41799,6 +41822,11 @@ PrefabInstance:
       propertyPath: m_SortingLayerID
       value: -894337699
       objectReference: {fileID: 0}
+    - target: {fileID: 5553633832817660804, guid: ab5dca173f53f5244a437a668d1c6c5c,
+        type: 3}
+      propertyPath: dropSound
+      value: 
+      objectReference: {fileID: 1041989759}
     - target: {fileID: 5553633832817660804, guid: ab5dca173f53f5244a437a668d1c6c5c,
         type: 3}
       propertyPath: MinimumFoodCount

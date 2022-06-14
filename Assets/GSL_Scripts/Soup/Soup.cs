@@ -42,11 +42,10 @@ public class Soup : NetworkBehaviour
 
 	private SoupState CurrentState;
 
-	AudioSource dropSound;
+	public AudioSource dropSound;
 
 	private void Start()
 	{
-		dropSound = GetComponent<AudioSource>();
 		CurrentState = SoupState.INACTIVE;
 		SoupSprite.sprite = InactiveSoupSprite;
 
