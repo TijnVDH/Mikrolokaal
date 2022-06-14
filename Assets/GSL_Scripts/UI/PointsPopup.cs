@@ -13,7 +13,7 @@ public class PointsPopup : MonoBehaviour
 
     private void Awake()
     {
-        pointsText = GetComponent<TextMeshPro>();
+        //pointsText = GetComponent<TextMeshPro>();
     }
 
     private void Start()

@@ -3,7 +3,11 @@ guid: ae7c4ca208bbc8b49934a3a5c90a4729
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - HordeTarget: {instanceID: 0}
+  - Soup: {instanceID: 0}
+  - pointsPopUpField: {fileID: 3995671126090379409, guid: bfad28ef0f4a7d64295e1eb7ae7e0cd0,
+      type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

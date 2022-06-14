@@ -277,7 +277,7 @@ public class Character : NetworkBehaviour
         MovementSpeed = newUpgrade.Equals(UpgradeType.SPEED) ? UpgradedSpeed : defaultSpeed;
         ChangeInventorySlots(newUpgrade.Equals(UpgradeType.CARRY) ? UpgradedSlots : defaultSlots);
         ChangeForm();
-        AwardUpgradePoints();
+        if(CharacterType == CharacterType.Player) AwardUpgradePoints();
     }
 
     public void ChangeInventorySlots(int newAmount) {
@@ -421,33 +421,33 @@ public class Character : NetworkBehaviour
         scoreScript.ItemDropPoints();
 
         // pop up points
-        /*
+        
         Instantiate(pointsPopUpField, transform.position, Quaternion.identity);
         pointsScript = pointsPopUpField.GetComponent<PointsPopup>();
-        pointsScript.pointsText.text = "+20";*/
-    }
-
-    void AwardUpgradePoints()
-    {
-        // award upgrade points
-        scoreScript.EnemyDefeatPoints();
-
-        // pop up points
-        /*
-        Instantiate(pointsPopUpField, transform.position, Quaternion.identity);
-        pointsScript = pointsPopUpField.GetComponent<PointsPopup>();
-        pointsScript.pointsText.text = "+10";*/
+        pointsScript.pointsText.text = "+20";
     }
 
     void AwardDefeatPoints()
     {
         // award upgrade points
+        scoreScript.EnemyDefeatPoints();
+
+        // pop up points
+        
+        Instantiate(pointsPopUpField, transform.position, Quaternion.identity);
+        pointsScript = pointsPopUpField.GetComponent<PointsPopup>();
+        pointsScript.pointsText.text = "+10";
+    }
+
+    void AwardUpgradePoints()
+    {
+        // award upgrade points
         scoreScript.UpgradePickupPoints();
 
         // pop up points
-        /*
+        
         Instantiate(pointsPopUpField, transform.position, Quaternion.identity);
         pointsScript = pointsPopUpField.GetComponent<PointsPopup>();
-        pointsScript.pointsText.text = "+5";*/
+        pointsScript.pointsText.text = "+5";
     }
 }

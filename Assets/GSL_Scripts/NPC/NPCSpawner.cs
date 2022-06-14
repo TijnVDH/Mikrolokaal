@@ -16,8 +16,7 @@ public class NPCSpawner : NetworkBehaviour
 
     private Spawner spawner;
     private List<NPC> spawnedObjects;
-
-	public void Start()
+    public void Start()
     {
         spawnedObjects = new List<NPC>();
         spawner = this.GetComponent<Spawner>();

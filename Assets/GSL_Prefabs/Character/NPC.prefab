@@ -112,8 +112,7 @@ MonoBehaviour:
   UpgradedAttack: 2
   UpgradedSpeed: 0
   UpgradedSlots: 0
-  soup: {fileID: 5553633832817660805, guid: ab5dca173f53f5244a437a668d1c6c5c, type: 3}
-  pointsPopUpField: {fileID: 3995671126090379409, guid: bfad28ef0f4a7d64295e1eb7ae7e0cd0,
+  pointsPopUpField: {fileID: 840903136328365084, guid: f99db70dc9e759c4e9ca850ccda34e31,
     type: 3}
 --- !u!114 &-708332778737580612
 MonoBehaviour:
