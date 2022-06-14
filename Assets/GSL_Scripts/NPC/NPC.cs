@@ -4,6 +4,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
+
 
 public class NPC : NetworkBehaviour
 {
@@ -12,16 +14,19 @@ public class NPC : NetworkBehaviour
 
     public NPCSpawner spawner;
     public NPCPath path;
+    [SerializeField] GameObject animator;
+    private void Awake()
+    {
+        Animator anim = GetComponent<Animator>();
+        AnimatorStateInfo state = anim.GetCurrentAnimatorStateInfo(0);
+        anim.Play(state.fullPathHash, -1, Random.Range(0f, 1f));
 
-	private void Awake()
-	{
         path.OnReachedTarget += () =>
         {
             if (!isServer) return;
-
             Debug.Log("Dropping food");
-            RpcDropInventory();
-            FoodInventory.NPCDropAll();
+            animator.GetComponent<Animator>().Play("DropItem");
+            StartCoroutine(DropInventory());
         };
 
         path.OnReachedExit += () =>
@@ -31,13 +36,22 @@ public class NPC : NetworkBehaviour
             RemoveFromSpawner();
             NetworkServer.Destroy(gameObject);
         };
-	}
+    }
 
-    [ClientRpc] private void RpcDropInventory() {
+    IEnumerator DropInventory()
+    {
+        yield return new WaitForSeconds(2);
+        RpcDropInventory();
+        FoodInventory.NPCDropAll();
+    }
+
+    [ClientRpc]
+    private void RpcDropInventory()
+    {
         GetComponent<Character>().ChangeInventorySlots(0);
     }
 
-	public void StartMoving(Transform target, Soup soup, List<GameObject> leaveTargets)
+    public void StartMoving(Transform target, Soup soup, List<GameObject> leaveTargets)
     {
         path.StartMoving(target, leaveTargets);
     }

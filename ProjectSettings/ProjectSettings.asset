@@ -547,7 +547,7 @@ PlayerSettings:
   enableInternalProfiler: 0
   logObjCUncaughtExceptions: 1
   enableCrashReportAPI: 0
-  cameraUsageDescription: 
+  cameraUsageDescription: Using camera for QR scanning
   locationUsageDescription: 
   microphoneUsageDescription: 
   switchNMETAOverride: 

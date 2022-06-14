@@ -9,15 +9,19 @@ public class NetworkWindowView : MonoBehaviour
 	[Header("Networking")]
 	[SerializeField] private NetworkManager networkManager;
 
-    [Header("UI Components")]
-    [SerializeField] private TMP_Text ipText;
+	[Header("UI Components")]
+	//[SerializeField] private TMP_Text ipText;
 	[SerializeField] private TMP_InputField ipInput;
 
 	private const string PLAYER_PREFS_IP = "hostIP";
 
+	private CommonsLibary commonsLibary = new CommonsLibary();
+
+	[SerializeField] private GameObject QRScanner;
+
 	private void Start()
 	{
-		SetIpText();
+		//SetIpText();
 		SetLastJoinedIP();
 	}
 
@@ -28,13 +32,44 @@ public class NetworkWindowView : MonoBehaviour
 			Destroy(gameObject);
 		}
 	}
+	/// <summary>
+	/// normal version
+	/// </summary>
+	//public void JoinGame()
+	//{
+	//	PlayerPrefs.SetString(PLAYER_PREFS_IP, ipInput.text);
+	//	Debug.Log("IP INPUT: " + ipInput.text);
+	//	networkManager.networkAddress = ipInput.text;
+	//	Debug.Log("NETWORK ADDRESS: " + ipInput.text);
+	//	networkManager.StartClient();
+	//}
 
+	/// <summary>
+	/// Game pass version
+	/// </summary>
 	public void JoinGame()
 	{
+		string _ipv4 = commonsLibary.PassDecodeToIPv4(ipInput.text);
+
 		PlayerPrefs.SetString(PLAYER_PREFS_IP, ipInput.text);
-		Debug.Log("IP INPUT: " + ipInput.text);
-		networkManager.networkAddress = ipInput.text;
-		Debug.Log("NETWORK ADDRESS: " + ipInput.text);
+		Debug.Log("IP INPUT: " + _ipv4);
+		networkManager.networkAddress = _ipv4;
+		Debug.Log("NETWORK ADDRESS: " + _ipv4);
+		networkManager.StartClient();
+	}
+
+	/// <summary>
+	/// QR code version
+	/// </summary>
+	/// <param name="_ipv4"></param>
+	public void JoinGame(string _passCode)
+	{
+		string _ipv4 = commonsLibary.PassDecodeToIPv4(_passCode);
+
+		PlayerPrefs.SetString(PLAYER_PREFS_IP, _passCode);
+		Debug.Log("IP INPUT: " + _ipv4);
+		networkManager.networkAddress = _ipv4;
+		Debug.Log("NETWORK ADDRESS: " + _ipv4);
 		networkManager.StartClient();
 	}
 
@@ -43,13 +78,25 @@ public class NetworkWindowView : MonoBehaviour
 		networkManager.StartHost();
 	}
 
-	private void SetIpText()
-	{
-		//string[] ipSplit = IPManager.GetIP().Split('.');
-		//ipText.text = "Room code: " + ipSplit[ipSplit.Length - 1];
+	public void ScanQR()
+    {
+		QRScanner.SetActive(true);
+    }
 
-		ipText.text = "IP: " + IPManager.GetIP();
-	}
+	//private void SetIpText()
+	//{
+	//	string[] ipSplit = IPManager.GetIP().Split('.');
+	//	ipText.text = "Room code: " + ipSplit[ipSplit.Length - 1];
+
+	//	ipText.text = "IP: " + IPManager.GetIP();
+	//}
+
+	//private void SetGamePassText()
+ //   {
+	//	string _ipv4 = commonsLibary.GetIPv4();
+	//	string[] _ipv1x4 = _ipv4.Split('.');
+	//	ipText.text = "Pass: " + commonsLibary.IPv4EncodeToPass(_ipv1x4).ToString("X");
+ //   }
 
 	private void SetLastJoinedIP()
 	{

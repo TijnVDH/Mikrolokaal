@@ -183,6 +183,12 @@ PrefabInstance:
       propertyPath: startSpawningOnEnable
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6614645871292436729, guid: f2d324e14c37f5c4391b20f719bf240d,
+        type: 3}
+      propertyPath: spawnOptions.Array.data[0]
+      value: 
+      objectReference: {fileID: 554938951314576924, guid: 603a49940c2f93a418d0f797d2ad25d4,
+        type: 3}
     - target: {fileID: 9193646857770510377, guid: f2d324e14c37f5c4391b20f719bf240d,
         type: 3}
       propertyPath: m_AssetId
