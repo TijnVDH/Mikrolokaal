@@ -32,7 +32,7 @@ public class Soup : NetworkBehaviour
 
 	public int MaxFoodDifference { get => soupContent.Values.Max() - soupContent.Values.Min(); }
 
-	private Dictionary<FoodType, int> soupContent = new Dictionary<FoodType, int>();
+	public Dictionary<FoodType, int> soupContent = new Dictionary<FoodType, int>();
 
 	public static SoupStateAction OnStateChange;
 	public delegate void SoupStateAction(SoupState state);
@@ -101,16 +101,6 @@ public class Soup : NetworkBehaviour
 		if (soupContent.ContainsKey(type))
 		{
 			soupContent[type] += amount;
-
-			if(GetFoodShortage(type) > 0)
-            {
-				// award points
-				scoreScript.ItemDropPoints();
-				// show points
-				Instantiate(pointsPopUpField, new Vector3(0, 0, 0), Quaternion.identity);
-				pointsScript = pointsPopUpField.GetComponent<PointsPopup>();
-				pointsScript.pointsText.text = "+20";
-            }
 		}
 		else
 		{
@@ -270,4 +260,9 @@ public class Soup : NetworkBehaviour
 
 		OnStateChange(newState);
 	}
+
+	public Dictionary<FoodType, int> getSoupContents()
+    {
+		return soupContent;
+    }
 }

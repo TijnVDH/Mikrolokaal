@@ -59,12 +59,19 @@ public class Character : NetworkBehaviour
 
     ScoreCounter scoreScript;
 
+    GameObject soup;
+    Soup soupScript;
+
     public GameObject pointsPopUpField;
     PointsPopup pointsScript;
 
     public void Awake()
     {
+        soup = GameObject.Find("Soup");
+        soupScript = soup.GetComponent<Soup>();
+
         scoreScript = GameObject.Find("Score").GetComponent<ScoreCounter>();
+        pointsScript = pointsPopUpField.GetComponent<PointsPopup>();
 
         defaultAttack = AttackStrength;
         defaultSlots = InventorySlots;
@@ -175,15 +182,6 @@ public class Character : NetworkBehaviour
         {
             // ask the server to handle the upgrade
             CmdUpgrade(upgrader.UpgradeType);
-
-            // award upgrade points
-            scoreScript.UpgradePickupPoints();
-
-            // pop up points
-            Instantiate(pointsPopUpField, new Vector3(0, 0, 0), Quaternion.identity);
-            pointsScript = pointsPopUpField.GetComponent<PointsPopup>();
-            pointsScript.pointsText.text = "+5";
-
         }
     }
 
@@ -228,6 +226,41 @@ public class Character : NetworkBehaviour
 
     [ClientRpc] public void RpcDropInventory() 
     {
+        int soupSquares = soupScript.GetFoodCount(FoodType.SQUARE);
+        int soupCircles = soupScript.GetFoodCount(FoodType.CIRCLE);
+        int soupTriangles = soupScript.GetFoodCount(FoodType.TRIANGLE);
+
+        foreach (FoodType fType in FoodInventory.Items)
+        {
+            switch (fType)
+            {
+                case FoodType.SQUARE:
+                    {
+                        if(soupSquares < soupCircles || soupSquares < soupTriangles)
+                        {
+                            AwardDropPoints();
+                        }
+                        break;
+                    }
+                case FoodType.CIRCLE:
+                    {
+                        if (soupCircles < soupSquares || soupCircles < soupTriangles)
+                        {
+                            AwardDropPoints();
+                        }
+                        break;
+                    }
+                case FoodType.TRIANGLE:
+                    {
+                        if (soupTriangles < soupCircles || soupTriangles < soupSquares)
+                        {
+                            AwardDropPoints();
+                        }
+                        break;
+                    }
+                default: { break; }
+            }
+        }
         FoodInventory.DropAll();
         FoodInventoryDisplay.ResetSprites();
     }
@@ -244,6 +277,7 @@ public class Character : NetworkBehaviour
         MovementSpeed = newUpgrade.Equals(UpgradeType.SPEED) ? UpgradedSpeed : defaultSpeed;
         ChangeInventorySlots(newUpgrade.Equals(UpgradeType.CARRY) ? UpgradedSlots : defaultSlots);
         ChangeForm();
+        AwardUpgradePoints();
     }
 
     public void ChangeInventorySlots(int newAmount) {
@@ -285,6 +319,8 @@ public class Character : NetworkBehaviour
                 npc.RemoveFromSpawner();
             }
             NetworkServer.Destroy(enemy.gameObject);
+
+            RpcAwardDefeatpoints();
         }
 
         // Set immune for x seconds
@@ -301,6 +337,13 @@ public class Character : NetworkBehaviour
         Debug.Log("Immunity");
         StartCoroutine(ImmunityTimer());
     }
+
+    [ClientRpc]
+    public void RpcAwardDefeatpoints()
+    {
+        AwardDefeatPoints();
+    }
+
 
     [ClientRpc]
     public void RpcTakeDamage()
@@ -370,5 +413,41 @@ public class Character : NetworkBehaviour
         isImmune = false;
         blinkTween.Kill();
         formSpriteRenderer.DOFade(1, 0);
+    }
+
+    void AwardDropPoints()
+    {
+        // award upgrade points
+        scoreScript.ItemDropPoints();
+
+        // pop up points
+        /*
+        Instantiate(pointsPopUpField, transform.position, Quaternion.identity);
+        pointsScript = pointsPopUpField.GetComponent<PointsPopup>();
+        pointsScript.pointsText.text = "+20";*/
+    }
+
+    void AwardUpgradePoints()
+    {
+        // award upgrade points
+        scoreScript.EnemyDefeatPoints();
+
+        // pop up points
+        /*
+        Instantiate(pointsPopUpField, transform.position, Quaternion.identity);
+        pointsScript = pointsPopUpField.GetComponent<PointsPopup>();
+        pointsScript.pointsText.text = "+10";*/
+    }
+
+    void AwardDefeatPoints()
+    {
+        // award upgrade points
+        scoreScript.UpgradePickupPoints();
+
+        // pop up points
+        /*
+        Instantiate(pointsPopUpField, transform.position, Quaternion.identity);
+        pointsScript = pointsPopUpField.GetComponent<PointsPopup>();
+        pointsScript.pointsText.text = "+5";*/
     }
 }

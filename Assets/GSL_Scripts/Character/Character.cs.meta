@@ -3,7 +3,13 @@ guid: 5affaa77f3a6e2f44993fecee6cc3087
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - FoodInventory: {instanceID: 0}
+  - FoodInventoryDisplay: {instanceID: 0}
+  - formSpriteRenderer: {instanceID: 0}
+  - Movement: {instanceID: 0}
+  - pointsPopUpField: {fileID: 3995671126090379409, guid: bfad28ef0f4a7d64295e1eb7ae7e0cd0,
+      type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

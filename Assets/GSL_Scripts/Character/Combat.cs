@@ -21,16 +21,9 @@ public class Combat : NetworkBehaviour
     private Character character;
     private bool isImmune = false;
 
-    ScoreCounter scoreScript;
-
-    public GameObject pointsPopUpField;
-    PointsPopup pointsScript;
-
     private void Start()
     {
         character = GetComponent<Character>();
-
-        scoreScript = GameObject.Find("Score").GetComponent<ScoreCounter>();
     }
 
     public void OnCollisionEnter(Collision collision)
@@ -69,13 +62,6 @@ public class Combat : NetworkBehaviour
             if (otherCharacter.CharacterType == CharacterType.Player)
             {
                 // Other is a player, player wins
-
-                // award points
-                scoreScript.EnemyDefeatPoints();
-                // pop up points
-                Instantiate(pointsPopUpField, new Vector3(0, 0, 0), Quaternion.identity);
-                pointsScript = pointsPopUpField.GetComponent<PointsPopup>();
-                pointsScript.pointsText.text = "+10";
 
                 // This one dies
                 Die();

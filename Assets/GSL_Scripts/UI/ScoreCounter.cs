@@ -18,7 +18,7 @@ public class ScoreCounter : MonoBehaviour
 
     void Awake()
     {
-        teamScore = 450;
+        teamScore = 0;
         mText = GetComponent<TextMeshProUGUI>();
     }
 

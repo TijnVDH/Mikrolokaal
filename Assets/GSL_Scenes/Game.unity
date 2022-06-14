@@ -25384,7 +25384,7 @@ MonoBehaviour:
   correctItemDrop: 20
   upgradePickUp: 5
   EnableOnWin: {fileID: 394211053}
-  pointsToWin: 500
+  pointsToWin: 10000
 --- !u!1001 &758670358
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -41663,7 +41663,7 @@ PrefabInstance:
         type: 3}
       propertyPath: pointsPopUpField
       value: 
-      objectReference: {fileID: 8457281429280048925, guid: 5d66fc60a25e47a4f901f5d01070ca87,
+      objectReference: {fileID: 3995671126090379409, guid: bfad28ef0f4a7d64295e1eb7ae7e0cd0,
         type: 3}
     - target: {fileID: 5553633832817660804, guid: ab5dca173f53f5244a437a668d1c6c5c,
         type: 3}
@@ -68931,14 +68931,13 @@ PrefabInstance:
         type: 3}
       propertyPath: m_fontAsset
       value: 
-      objectReference: {fileID: 11400000, guid: 435566510ac9be849b860240326541aa,
+      objectReference: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee,
         type: 2}
     - target: {fileID: 34145408121646802, guid: 75d6d4a38633d7c47b199955c315e29a,
         type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: -5194457948688592959, guid: 435566510ac9be849b860240326541aa,
-        type: 2}
+      objectReference: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
     - target: {fileID: 3518622586834999398, guid: 75d6d4a38633d7c47b199955c315e29a,
         type: 3}
       propertyPath: m_Name
