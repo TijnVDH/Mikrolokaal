@@ -62,8 +62,9 @@ public class Character : NetworkBehaviour
     GameObject soup;
     Soup soupScript;
 
-    public GameObject pointsPopUpField;
-    PointsPopup pointsScript;
+    public GameObject fivePointsPopUpField;
+    public GameObject tenPointsPopUpField;
+    public GameObject twentyPointsPopUpField;
 
     public void Awake()
     {
@@ -71,7 +72,6 @@ public class Character : NetworkBehaviour
         soupScript = soup.GetComponent<Soup>();
 
         scoreScript = GameObject.Find("Score").GetComponent<ScoreCounter>();
-        pointsScript = pointsPopUpField.GetComponent<PointsPopup>();
 
         defaultAttack = AttackStrength;
         defaultSlots = InventorySlots;
@@ -422,9 +422,7 @@ public class Character : NetworkBehaviour
 
         // pop up points
         
-        Instantiate(pointsPopUpField, transform.position, Quaternion.identity);
-        pointsScript = pointsPopUpField.GetComponent<PointsPopup>();
-        pointsScript.pointsText.text = "+20";
+        Instantiate(twentyPointsPopUpField, transform.position, Quaternion.identity);
     }
 
     void AwardDefeatPoints()
@@ -434,9 +432,7 @@ public class Character : NetworkBehaviour
 
         // pop up points
         
-        Instantiate(pointsPopUpField, transform.position, Quaternion.identity);
-        pointsScript = pointsPopUpField.GetComponent<PointsPopup>();
-        pointsScript.pointsText.text = "+10";
+        Instantiate(tenPointsPopUpField, transform.position, Quaternion.identity);
     }
 
     void AwardUpgradePoints()
@@ -446,8 +442,6 @@ public class Character : NetworkBehaviour
 
         // pop up points
         
-        Instantiate(pointsPopUpField, transform.position, Quaternion.identity);
-        pointsScript = pointsPopUpField.GetComponent<PointsPopup>();
-        pointsScript.pointsText.text = "+5";
+        Instantiate(fivePointsPopUpField, transform.position, Quaternion.identity);
     }
 }

@@ -112,7 +112,11 @@ MonoBehaviour:
   UpgradedAttack: 2
   UpgradedSpeed: 0
   UpgradedSlots: 0
-  pointsPopUpField: {fileID: 840903136328365084, guid: f99db70dc9e759c4e9ca850ccda34e31,
+  fivePointsPopUpField: {fileID: 5297729869637324723, guid: cc19154eb2525fc418f076228eb455b8,
+    type: 3}
+  tenPointsPopUpField: {fileID: 1477677413811398437, guid: 42b0bb50f4ec30f40b67724545f06485,
+    type: 3}
+  twentyPointsPopUpField: {fileID: 7998818311424257209, guid: d3b9604f0457eb049aa216e6b34fc61b,
     type: 3}
 --- !u!114 &-708332778737580612
 MonoBehaviour:
