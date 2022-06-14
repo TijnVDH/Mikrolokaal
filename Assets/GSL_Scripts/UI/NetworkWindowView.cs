@@ -10,7 +10,7 @@ public class NetworkWindowView : MonoBehaviour
 	[SerializeField] private NetworkManager networkManager;
 
 	[Header("UI Components")]
-	[SerializeField] private TMP_Text ipText;
+	//[SerializeField] private TMP_Text ipText;
 	[SerializeField] private TMP_InputField ipInput;
 
 	private const string PLAYER_PREFS_IP = "hostIP";
@@ -22,7 +22,6 @@ public class NetworkWindowView : MonoBehaviour
 	private void Start()
 	{
 		//SetIpText();
-		SetGamePassText();
 		SetLastJoinedIP();
 	}
 
@@ -92,12 +91,12 @@ public class NetworkWindowView : MonoBehaviour
 	//	ipText.text = "IP: " + IPManager.GetIP();
 	//}
 
-	private void SetGamePassText()
-    {
-		string _ipv4 = commonsLibary.GetIPv4();
-		string[] _ipv1x4 = _ipv4.Split('.');
-		ipText.text = "Pass: " + commonsLibary.IPv4EncodeToPass(_ipv1x4).ToString("X");
-    }
+	//private void SetGamePassText()
+ //   {
+	//	string _ipv4 = commonsLibary.GetIPv4();
+	//	string[] _ipv1x4 = _ipv4.Split('.');
+	//	ipText.text = "Pass: " + commonsLibary.IPv4EncodeToPass(_ipv1x4).ToString("X");
+ //   }
 
 	private void SetLastJoinedIP()
 	{

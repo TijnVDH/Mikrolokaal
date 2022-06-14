@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Mirror;
 using UnityEngine;
+using TMPro;
 
 // Only functions that are used by the player/virus controller
 [RequireComponent(typeof(NetworkTransform))]
@@ -45,6 +46,11 @@ public class Character : NetworkBehaviour
     public float UpgradedAttack;
     public float UpgradedSpeed;
     public int UpgradedSlots;
+
+    [Header("Nickname")]
+    [SyncVar] public string nickname;
+
+    [SerializeField] private TMP_Text nickText;
 
     private float defaultAttack;
     private float defaultSpeed;
@@ -119,12 +125,14 @@ public class Character : NetworkBehaviour
             InventorySlots = FoodInventory.CurrentSlotsAmount;
         }
 
-        if(isServerCharacter) {
+        if (isServerCharacter)
+        {
             HideCharacter();
         }
     }
 
-    private void HideCharacter() {
+    private void HideCharacter()
+    {
         foreach (Renderer renderer in GetComponentsInChildren<Renderer>())
         {
             renderer.enabled = false;
@@ -151,27 +159,29 @@ public class Character : NetworkBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other) {
+    private void OnTriggerEnter(Collider other)
+    {
         // only handle triggers from the local player
-        if(!isLocalPlayer) return;
+        if (!isLocalPlayer) return;
 
         // colliding with food?
         Food food = other.gameObject.GetComponent<Food>();
-        if (food != null) 
+        if (food != null)
         {
             // ask the server to handle the pickup
             CmdPickUpFood(food);
         }
 
         Upgrader upgrader = other.gameObject.GetComponent<Upgrader>();
-        if (upgrader != null) 
+        if (upgrader != null)
         {
             // ask the server to handle the upgrade
             CmdUpgrade(upgrader.UpgradeType);
         }
     }
 
-    [Command] public void CmdPickUpFood(Food food)
+    [Command]
+    public void CmdPickUpFood(Food food)
     {
         // when two players collide with food simultaneously it might ask the server to pick up
         // food that was already destroyed on the server side, but hasn't synced to client side yet 
@@ -181,7 +191,8 @@ public class Character : NetworkBehaviour
             return;
         }
 
-        if (FoodInventory.HasSpace()) {
+        if (FoodInventory.HasSpace())
+        {
             // destroy food object on all clients
             NetworkServer.Destroy(food.gameObject);
 
@@ -190,38 +201,44 @@ public class Character : NetworkBehaviour
         }
     }
 
-    [ClientRpc] public void RpcAddToInventory(FoodType food) 
+    [ClientRpc]
+    public void RpcAddToInventory(FoodType food)
     {
-        if (FoodInventory.HasSpace()) {
+        if (FoodInventory.HasSpace())
+        {
             FoodInventory.AddToInventory(food);
             FoodInventoryDisplay.AddItem(food);
         }
     }
 
-    public void DropInventory() 
+    public void DropInventory()
     {
         // ask server to handle dropping inventory
         CmdDropInventory();
     }
 
-    [Command] public void CmdDropInventory() 
+    [Command]
+    public void CmdDropInventory()
     {
         // tell all clients that this character needs to drop it's inventory
         RpcDropInventory();
     }
 
-    [ClientRpc] public void RpcDropInventory() 
+    [ClientRpc]
+    public void RpcDropInventory()
     {
         FoodInventory.DropAll();
         FoodInventoryDisplay.ResetSprites();
     }
 
-    [Command] public void CmdUpgrade(UpgradeType newUpgrade) 
+    [Command]
+    public void CmdUpgrade(UpgradeType newUpgrade)
     {
         RpcUpgrade(newUpgrade);
     }
 
-    [ClientRpc] public void RpcUpgrade(UpgradeType newUpgrade) 
+    [ClientRpc]
+    public void RpcUpgrade(UpgradeType newUpgrade)
     {
         ActiveUpgrade = newUpgrade;
         AttackStrength = newUpgrade.Equals(UpgradeType.ATTACK) ? UpgradedAttack : defaultAttack;
@@ -230,7 +247,8 @@ public class Character : NetworkBehaviour
         ChangeForm();
     }
 
-    public void ChangeInventorySlots(int newAmount) {
+    public void ChangeInventorySlots(int newAmount)
+    {
         FoodInventory.ChangeSlotsAmount(newAmount);
         FoodInventoryDisplay.ResetSprites();
         foreach (FoodType food in FoodInventory.Items)
@@ -293,7 +311,8 @@ public class Character : NetworkBehaviour
         // i dunno, that comes later
     }
 
-    private void SetSpriteFacing(Vector3 moveDirection) {
+    private void SetSpriteFacing(Vector3 moveDirection)
+    {
         formSpriteRenderer.flipX = moveDirection.x < 0;
     }
 
@@ -354,5 +373,24 @@ public class Character : NetworkBehaviour
         isImmune = false;
         blinkTween.Kill();
         formSpriteRenderer.DOFade(1, 0);
+    }
+
+    [Command]
+    void CmdChangeName(string name)
+    {
+        RpcChnageName(name);
+    }
+
+    [ClientRpc]
+    void RpcChnageName(string name)
+    {
+        nickname = name;
+        nickText.text = name;
+    }
+
+    void OnClientConnect()
+    {
+        CmdChangeName(GameObject.FindGameObjectWithTag("Nickname_Dropdown").transform.GetComponent<TMP_Dropdown>().itemText.ToString());
+        Debug.Log(nickname);
     }
 }

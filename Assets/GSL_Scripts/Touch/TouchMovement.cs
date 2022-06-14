@@ -10,7 +10,6 @@ public class TouchMovement : NetworkBehaviour
 {
     [SerializeField] private Camera playerCam;
 
-    private Vector3 screenDirection;
     private new Rigidbody rigidbody;
     private Character character;
 
@@ -21,79 +20,42 @@ public class TouchMovement : NetworkBehaviour
     public event DirectionalMovementAction OnMove;
     public delegate void DirectionalMovementAction(Vector3 direction);
 
-    private bool isMoving = false;
+    private Joystick joystick;
+    Vector3 dir = Vector3.zero;
 
 	private void Start()
 	{
 		if (!isLocalPlayer)
 		{
             Destroy(playerCam);
+            Debug.Log("1");
             enabled = false;
-		}
+        }
 
         character = GetComponent<Character>();
+        Debug.Log("2");
         rigidbody = GetComponent<Rigidbody>();
-	}
-
-	private void Update()
-	{
-        if (!isLocalPlayer) return;
-
-		if (Input.GetMouseButton(0))
-		{
-            Vector3 transformScreenPos = playerCam.WorldToScreenPoint(transform.position);
-
-            screenDirection = (Input.mousePosition - transformScreenPos).normalized;
-            screenDirection.z = 0;
-        }
-        else
-		{
-            screenDirection = Vector3.zero;
-		}
+        Debug.Log("3");
+        InventoryUI inventoryUI = GameObject.Find("Inventory").transform.GetComponent<InventoryUI>();
+        Debug.Log("4");
+        inventoryUI.Joystick.SetActive(true);
+        Debug.Log("5");
+        joystick = inventoryUI.Joystick.transform.GetComponent<Joystick>();
+        Debug.Log("6");
     }
 
 	private void FixedUpdate()
     {
         if (!isLocalPlayer) return;
 
-        // any directional input detected?
-		if (screenDirection != Vector3.zero)
-		{
-            if (!isMoving)
-            {
-                isMoving = true;
-                OnStartMoving?.Invoke();
-            }
-
-            MoveCharacter();
-		}
-        else
-		{
-            if (isMoving)
-            {
-                isMoving = false;
-                OnStopMoving?.Invoke();
-            }
-        }
-
-        OnMove?.Invoke(screenDirection);
+        MoveCharacter();
     }
 
     private void MoveCharacter()
 	{
-        rigidbody.MovePosition(transform.position + (ScreenToWorldDirection(screenDirection) * character.MovementSpeed * Time.deltaTime));
+        dir.x = joystick.Horizontal != 0 ? joystick.Horizontal : 0;
+        dir.z = joystick.Vertical != 0 ? joystick.Vertical : 0;
+        rigidbody.MovePosition(transform.position + (dir * character.MovementSpeed * Time.deltaTime));
 	}
-
-    /// <summary>
-    /// Translates Screen vector to world vector. Screen works on xy axis, but our world movement works with xz axis
-    /// </summary>
-    private Vector3 ScreenToWorldDirection(Vector3 screenDirection)
-	{
-        return new Vector3
-        {
-            x = screenDirection.x,
-            y = screenDirection.z,
-            z = screenDirection.y,
-        };
-    }
+    
 }

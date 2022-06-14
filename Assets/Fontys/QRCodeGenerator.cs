@@ -7,12 +7,15 @@ using UnityEngine.UI;
 using TMPro;
 using Mirror;
 
-public class QRCodeGenerator : MonoBehaviour
+public class QRCodeGenerator : NetworkBehaviour
 {
     [SerializeField]
     private RawImage _rawImageReceiver;
 
-    private string _ip;
+    [SyncVar]
+    public string new_ip;
+
+    private string old_ip;
 
     private const string PLAYER_PREFS_IP = "hostIP";
 
@@ -20,24 +23,19 @@ public class QRCodeGenerator : MonoBehaviour
 
     private Texture2D _storeEncodedTexture;
 
+    [SerializeField] private TMP_Text ipText;
+
     // Start is called before the first frame update
     void Start()
     {
-        _ip = CL.GetIPv4();
-        string[] _ipv1x4 = _ip.Split('.');
-        _ip = CL.IPv4EncodeToPass(_ipv1x4).ToString("X");
+        new_ip = CL.GetIPv4();
+        string[] _ipv1x4 = new_ip.Split('.');
+        new_ip = CL.IPv4EncodeToPass(_ipv1x4).ToString("X");
         _storeEncodedTexture = new Texture2D(256, 256);
-
+        ipText.text = new_ip;
         EncodeTextToQRCode();
-    }
 
-    private void Update()
-    {
-        if (PlayerPrefs.HasKey(PLAYER_PREFS_IP) && PlayerPrefs.GetString(PLAYER_PREFS_IP) != "hostIP")
-        {
-            _ip = PlayerPrefs.GetString(PLAYER_PREFS_IP);
-            EncodeTextToQRCode();
-        }
+        old_ip = new_ip;
     }
 
     private Color32 [] Encode(string textForEncoding, int width, int height)
@@ -62,11 +60,34 @@ public class QRCodeGenerator : MonoBehaviour
 
     private void EncodeTextToQRCode()
     {
-        string textWrite = _ip;
+        string textWrite = new_ip;
         Color32[] _convertPixelToTexture = Encode(textWrite, _storeEncodedTexture.width, _storeEncodedTexture.height);
         _storeEncodedTexture.SetPixels32(_convertPixelToTexture);
         _storeEncodedTexture.Apply();
 
         _rawImageReceiver.texture = _storeEncodedTexture;
+    }
+
+    public override void OnStartClient()
+    {
+        get_ip();
+        Debug.Log("qr client connected");
+    }
+
+    [Command(requiresAuthority = false)]
+    public void get_ip()
+    {
+        RpcSend_ip(new_ip);
+        Debug.Log(new_ip);
+    }
+
+    [ClientRpc]
+    public void RpcSend_ip(string _result)
+    {
+        new_ip = _result;
+        Debug.Log(_result);
+        ipText.text = new_ip;
+        _storeEncodedTexture = new Texture2D(256, 256);
+        EncodeTextToQRCode();
     }
 }
