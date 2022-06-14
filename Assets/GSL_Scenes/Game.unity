@@ -25383,6 +25383,8 @@ MonoBehaviour:
   enemyDefeat: 10
   correctItemDrop: 20
   upgradePickUp: 5
+  EnableOnWin: {fileID: 394211053}
+  pointsToWin: 500
 --- !u!1001 &758670358
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -68920,6 +68922,23 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 233745880}
     m_Modifications:
+    - target: {fileID: 34145408121646802, guid: 75d6d4a38633d7c47b199955c315e29a,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 44.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 34145408121646802, guid: 75d6d4a38633d7c47b199955c315e29a,
+        type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 435566510ac9be849b860240326541aa,
+        type: 2}
+    - target: {fileID: 34145408121646802, guid: 75d6d4a38633d7c47b199955c315e29a,
+        type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -5194457948688592959, guid: 435566510ac9be849b860240326541aa,
+        type: 2}
     - target: {fileID: 3518622586834999398, guid: 75d6d4a38633d7c47b199955c315e29a,
         type: 3}
       propertyPath: m_Name

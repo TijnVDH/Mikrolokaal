@@ -13,15 +13,22 @@ public class ScoreCounter : MonoBehaviour
     [SerializeField] int correctItemDrop;
     [SerializeField] int upgradePickUp;
 
+    public GameObject EnableOnWin;
+    public int pointsToWin;
+
     void Awake()
     {
-        teamScore = 4256;
+        teamScore = 450;
         mText = GetComponent<TextMeshProUGUI>();
     }
 
     void Update()
     {
         mText.text = teamScore.ToString();
+        if(teamScore >= pointsToWin)
+        {
+            EnableOnWin.SetActive(true);
+        }
     }
 
     public void EnemyDefeatPoints()

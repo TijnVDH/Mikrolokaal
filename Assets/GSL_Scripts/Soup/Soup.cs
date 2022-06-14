@@ -102,14 +102,15 @@ public class Soup : NetworkBehaviour
 		{
 			soupContent[type] += amount;
 
-			// award points
-			scoreScript.ItemDropPoints();
-			// show points
-			Instantiate(pointsPopUpField, new Vector3(0, 0, 0), Quaternion.identity);
-			pointsScript = pointsPopUpField.GetComponent<PointsPopup>();
-			pointsScript.pointsText.text = "+20";
-			
-			
+			if(GetFoodShortage(type) > 0)
+            {
+				// award points
+				scoreScript.ItemDropPoints();
+				// show points
+				Instantiate(pointsPopUpField, new Vector3(0, 0, 0), Quaternion.identity);
+				pointsScript = pointsPopUpField.GetComponent<PointsPopup>();
+				pointsScript.pointsText.text = "+20";
+            }
 		}
 		else
 		{
