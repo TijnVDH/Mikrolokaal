@@ -64,6 +64,10 @@ public class Character : NetworkBehaviour
     /*[SyncVar]*/ private string currentNickName = "";
 
     [SerializeField] GameObject animator;
+
+    [Header("Particle")]
+    [SerializeField] GameObject particle;
+
     public void Awake()
     {
         defaultAttack = AttackStrength;
@@ -278,7 +282,10 @@ public class Character : NetworkBehaviour
             if (npc != null)
             {
                 npc.RemoveFromSpawner();
-            }
+            }            
+            
+            Instantiate(particle, new Vector3(transform.position.x, transform.position.y + 1f, transform.position.z), Quaternion.identity);
+            Destroy(particle, 2f);
             NetworkServer.Destroy(enemy.gameObject);
         }
 

@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Joystick
+  - Blue
+  - Green
+  - Pink
   layers:
   - Default
   - TransparentFX

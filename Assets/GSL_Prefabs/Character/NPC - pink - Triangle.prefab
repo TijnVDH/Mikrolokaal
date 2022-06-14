@@ -93,34 +93,6 @@ Transform:
   m_Father: {fileID: 3642830401491687500}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2799167908292667402
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2540010128240749449}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 57c008f954fe54a8bb972de1018a2cb8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_RootBone: {fileID: 5014793119703379903}
-  m_BoneTransforms:
-  - {fileID: 5014793119703379903}
-  - {fileID: 5738382606924880143}
-  - {fileID: 3642830401491687500}
-  - {fileID: 3881432020250728084}
-  - {fileID: 72453600407762216}
-  - {fileID: 6471833737466729881}
-  - {fileID: 6554801871759206472}
-  - {fileID: 5154144187808781764}
-  - {fileID: 4086923999651220446}
-  m_Bounds:
-    m_Center: {x: 0.3886571, y: 2.0349402, z: 0.00000058914304}
-    m_Extent: {x: 2.195341, y: 1.7317007, z: 0.00000065719047}
-  m_UseBatching: 1
-  m_AlwaysUpdate: 1
 --- !u!1 &3257307652968065350
 GameObject:
   m_ObjectHideFlags: 0
@@ -234,6 +206,34 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &2799167908292667402
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2540010128240749449}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57c008f954fe54a8bb972de1018a2cb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RootBone: {fileID: 5014793119703379903}
+  m_BoneTransforms:
+  - {fileID: 5014793119703379903}
+  - {fileID: 5738382606924880143}
+  - {fileID: 3642830401491687500}
+  - {fileID: 3881432020250728084}
+  - {fileID: 72453600407762216}
+  - {fileID: 6471833737466729881}
+  - {fileID: 6554801871759206472}
+  - {fileID: 5154144187808781764}
+  - {fileID: 4086923999651220446}
+  m_Bounds:
+    m_Center: {x: 0.3886571, y: 2.0349402, z: 0.00000058914304}
+    m_Extent: {x: 2.195341, y: 1.7317007, z: 0.00000065719047}
+  m_UseBatching: 1
+  m_AlwaysUpdate: 1
 --- !u!1 &6006941057577316383
 GameObject:
   m_ObjectHideFlags: 0
@@ -399,6 +399,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 554938951314576915, guid: 9ce9a314120c60e4fa89eb92c1f406db,
         type: 3}
+      propertyPath: particle
+      value: 
+      objectReference: {fileID: 3233442704866260721, guid: a56d7da8af495994b82bcbc3e4210e87,
+        type: 3}
+    - target: {fileID: 554938951314576915, guid: 9ce9a314120c60e4fa89eb92c1f406db,
+        type: 3}
       propertyPath: VirusType
       value: 2
       objectReference: {fileID: 0}
@@ -433,6 +439,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: NPC - pink - Triangle
+      objectReference: {fileID: 0}
+    - target: {fileID: 554938951314576924, guid: 9ce9a314120c60e4fa89eb92c1f406db,
+        type: 3}
+      propertyPath: m_TagString
+      value: Pink
       objectReference: {fileID: 0}
     - target: {fileID: 1622128412882571003, guid: 9ce9a314120c60e4fa89eb92c1f406db,
         type: 3}
@@ -563,7 +574,7 @@ PrefabInstance:
     - target: {fileID: 9000755673970365871, guid: 9ce9a314120c60e4fa89eb92c1f406db,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9ce9a314120c60e4fa89eb92c1f406db, type: 3}
