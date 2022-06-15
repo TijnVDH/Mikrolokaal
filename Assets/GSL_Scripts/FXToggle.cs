@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 
-public class FXToggle : MonoBehaviour
+public class FXToggle : NetworkBehaviour
 {
     List<AudioSource> sources = new List<AudioSource>();
     bool muted = false;
@@ -38,6 +38,7 @@ public class FXToggle : MonoBehaviour
         }
     }
 
+    [ClientRpc]
     public void ToggleSounds()
     {
         if(muted)
