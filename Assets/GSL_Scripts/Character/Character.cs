@@ -48,9 +48,9 @@ public class Character : NetworkBehaviour
     public int UpgradedSlots;
 
     [Header("Nickname")]
-    [SyncVar] public string nickname;
+    //[SyncVar] public string nickname;
     [SerializeField] private TMP_Text nickText;
-    //[SyncVar(hook = "DisplayPlayerName")] public string playerDisplayName;
+    [SyncVar(hook = "DisplayPlayerName")] public string playerDisplayName;
 
     
 
@@ -149,6 +149,7 @@ public class Character : NetworkBehaviour
         }
 
         //changename();
+        
 
     }
 
@@ -438,57 +439,59 @@ public class Character : NetworkBehaviour
         formSpriteRenderer.DOFade(1, 0);
     }
 
-    [Command]
-    void CmdChangeName()
-    {
-        RpcChangeName();
-    }
+    //[Command]
+    //void CmdChangeName()
+    //{
+    //    RpcChangeName();
+    //}
 
-    [ClientRpc]
-    void RpcChangeName()
-    {
-        //nickname = !isServer ? GameObject.FindGameObjectWithTag("Nickname_Dropdown").transform.GetComponent<NickNameHolderScript>().NickName : "";
-        
+    //[ClientRpc]
+    //void RpcChangeName()
+    //{
+    //    //nickname = !isServer ? GameObject.FindGameObjectWithTag("Nickname_Dropdown").transform.GetComponent<NickNameHolderScript>().NickName : "";
 
-        nickname = GameObject.FindGameObjectWithTag("Nickname_Dropdown").transform.GetComponent<NickNameHolderScript>().NickName;
 
-        nickText.text = nickname;
+    //    nickname = GameObject.FindGameObjectWithTag("Nickname_Dropdown").transform.GetComponent<NickNameHolderScript>().NickName;
 
-        if (isServer)
-            nickText.text = "";
+    //    nickText.text = nickname;
 
-        
-    }
+    //    if (isServer)
+    //        nickText.text = "";
+
+
+    //}
+
+    //public override void OnStartClient()
+    //{
+    //    CmdChangeName();
+    //}
+
+
+
+
+    //////////////////////////////////////////////////////
 
     public override void OnStartClient()
     {
-        CmdChangeName();
+        CmdSendName(GameObject.FindGameObjectWithTag("Nickname_Dropdown").transform.GetComponent<NickNameHolderScript>().NickName);
     }
 
-    //public override void OnStartLocalPlayer()
-    //{
+    [Command]
+    public void CmdSendName(string playerName)
+    {
+        
+        playerDisplayName = playerName;
+        DisplayPlayerName("Old", playerDisplayName);
+        // no rpc needed because the magic of SyncVar.
+        // a syncvar listen to data that is on the server
+        // thus, we change data on the server and ALL clients update the name with the use of the hook.
+    }
 
-    //}
-
-
-    /// //////////////////////////////////////////////////////
-
-
-
-    //[Command]
-    //public void CmdSendName(string playerName)
-    //{
-    //    playerDisplayName = playerName;
-
-    //    // no rpc needed because the magic of SyncVar.
-    //    // a syncvar listen to data that is on the server
-    //    // thus, we change data on the server and ALL clients update the name with the use of the hook.
-    //}
-
-    //public void DisplayPlayerName(string newName)
-    //{
-    //    nickText.text = newName;
-    //}
+    public void DisplayPlayerName(string oldName, string newName)
+    {
+        Debug.Log(oldName + " " + newName);
+        nickText.text = newName;
+    }
 
     [ClientRpc]
     public void RpcAwardDefeatpoints()
