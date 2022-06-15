@@ -7,8 +7,8 @@ using UnityEngine;
 public class Soup : NetworkBehaviour
 {
 	[Header("Config")]
-    public int MinimumFoodCount;
-    public float ConsumeRate;
+	public int MinimumFoodCount;
+	public float ConsumeRate;
 	public int AllowedFoodDifference;
 	public List<FoodType> RequiredFoodTypes;
 
@@ -32,7 +32,7 @@ public class Soup : NetworkBehaviour
 
 	public int MaxFoodDifference { get => soupContent.Values.Max() - soupContent.Values.Min(); }
 
-	private Dictionary<FoodType, int> soupContent = new Dictionary<FoodType, int>();
+	public Dictionary<FoodType, int> soupContent = new Dictionary<FoodType, int>();
 
 	public static SoupStateAction OnStateChange;
 	public delegate void SoupStateAction(SoupState state);
@@ -70,20 +70,22 @@ public class Soup : NetworkBehaviour
 		}
 	}
 
-	private void OnTriggerEnter(Collider other) {
+	private void OnTriggerEnter(Collider other)
+	{
 
 		// only the server triggers the trigger
 		if (!isServer) return;
 
 		Food food = other.gameObject.GetComponent<Food>();
-		if (food != null) 
+		if (food != null)
 		{
 			NetworkServer.Destroy(food.gameObject);
 			RpcAddFood(food.FoodType, 1);
 		}
 	}
 
-	[ClientRpc] public void RpcAddFood(FoodType type, int amount)
+	[ClientRpc]
+	public void RpcAddFood(FoodType type, int amount)
 	{
 		if (!RequiredFoodTypes.Contains(type))
 		{
@@ -113,7 +115,8 @@ public class Soup : NetworkBehaviour
 		if (isServer) UpdateHostIndicators();
 	}
 
-	[ClientRpc] public void RpcRemoveFood(FoodType type, int amount)
+	[ClientRpc]
+	public void RpcRemoveFood(FoodType type, int amount)
 	{
 		Debug.Log("soup: removing food " + type);
 		if (soupContent.ContainsKey(type))
@@ -177,7 +180,8 @@ public class Soup : NetworkBehaviour
 		}
 	}
 
-	private void AnimateBubbles() {
+	private void AnimateBubbles()
+	{
 		SurfaceBubbleParticles.Emit(Random.Range(MinSurfaceBubbleCount, MaxSurfaceBubbleCount));
 		RisingBubbleParticles.Emit(Random.Range(MinRisingBubbleCount, MaxRisingBubbleCount));
 	}
@@ -217,12 +221,12 @@ public class Soup : NetworkBehaviour
 		if (soupContent.ContainsKey(foodType))
 		{
 			return soupContent.Values.Max() - soupContent[foodType];
-		} 
+		}
 		else
 		{
 			if (soupContent.Count > 0)
 				return soupContent.Values.Max();
-			else 
+			else
 				return 0;
 		}
 	}
@@ -252,5 +256,10 @@ public class Soup : NetworkBehaviour
 		}
 
 		OnStateChange(newState);
+	}
+
+	public Dictionary<FoodType, int> getSoupContents()
+	{
+		return soupContent;
 	}
 }

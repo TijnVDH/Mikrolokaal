@@ -491,6 +491,12 @@ MonoBehaviour:
   UpgradedSlots: 3
   nickname: PLACEHOLDER
   nickText: {fileID: 7681372086553771729}
+  fivePointsPopUpField: {fileID: 5297729869637324723, guid: 1630c9c5c26fe9b48b4c7b08951a240f,
+    type: 3}
+  tenPointsPopUpField: {fileID: 1477677413811398437, guid: a72adc63b35d65248aff6b339b3da56c,
+    type: 3}
+  twentyPointsPopUpField: {fileID: 7998818311424257209, guid: 9f67cd5d16ce8b248aaefe673e0bfc87,
+    type: 3}
 --- !u!114 &5610777206590781507
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -49,12 +49,24 @@ public class Character : NetworkBehaviour
 
     [Header("Nickname")]
     [SyncVar] public string nickname;
-
     [SerializeField] private TMP_Text nickText;
+    //[SyncVar(hook = "DisplayPlayerName")] public string playerDisplayName;
+
+    
+
+    [Header("Score")]
+    public GameObject fivePointsPopUpField;
+    public GameObject tenPointsPopUpField;
+    public GameObject twentyPointsPopUpField;
+    private ScoreCounter scoreScript;
 
     private float defaultAttack;
     private float defaultSpeed;
     private int defaultSlots;
+
+    // Soup
+    private GameObject soup;
+    private Soup soupScript;
 
     // combat
     private bool isImmune = false;
@@ -63,10 +75,13 @@ public class Character : NetworkBehaviour
 
     [SyncVar] private bool isServerCharacter = false;
 
-    //[SyncVar(hook = "DisplayPlayerName")] public string playerDisplayName;
 
     public void Awake()
     {
+        soup = GameObject.Find("Soup");
+        soupScript = soup.GetComponent<Soup>();
+        scoreScript = GameObject.Find("Score").GetComponent<ScoreCounter>();
+
         defaultAttack = AttackStrength;
         defaultSlots = InventorySlots;
         defaultSpeed = MovementSpeed;
@@ -233,6 +248,41 @@ public class Character : NetworkBehaviour
     [ClientRpc]
     public void RpcDropInventory()
     {
+        int soupSquares = soupScript.GetFoodCount(FoodType.SQUARE);
+        int soupCircles = soupScript.GetFoodCount(FoodType.CIRCLE);
+        int soupTriangles = soupScript.GetFoodCount(FoodType.TRIANGLE);
+
+        foreach (FoodType fType in FoodInventory.Items)
+        {
+            switch (fType)
+            {
+                case FoodType.SQUARE:
+                    {
+                        if (soupSquares < soupCircles || soupSquares < soupTriangles)
+                        {
+                            AwardDropPoints();
+                        }
+                        break;
+                    }
+                case FoodType.CIRCLE:
+                    {
+                        if (soupCircles < soupSquares || soupCircles < soupTriangles)
+                        {
+                            AwardDropPoints();
+                        }
+                        break;
+                    }
+                case FoodType.TRIANGLE:
+                    {
+                        if (soupTriangles < soupCircles || soupTriangles < soupSquares)
+                        {
+                            AwardDropPoints();
+                        }
+                        break;
+                    }
+                default: { break; }
+            }
+        }
         FoodInventory.DropAll();
         FoodInventoryDisplay.ResetSprites();
     }
@@ -246,11 +296,14 @@ public class Character : NetworkBehaviour
     [ClientRpc]
     public void RpcUpgrade(UpgradeType newUpgrade)
     {
+        UpgradeType lastUpdate = ActiveUpgrade;
         ActiveUpgrade = newUpgrade;
         AttackStrength = newUpgrade.Equals(UpgradeType.ATTACK) ? UpgradedAttack : defaultAttack;
         MovementSpeed = newUpgrade.Equals(UpgradeType.SPEED) ? UpgradedSpeed : defaultSpeed;
         ChangeInventorySlots(newUpgrade.Equals(UpgradeType.CARRY) ? UpgradedSlots : defaultSlots);
         ChangeForm();
+        if (CharacterType == CharacterType.Player && lastUpdate != newUpgrade) 
+            AwardUpgradePoints();
     }
 
     public void ChangeInventorySlots(int newAmount)
@@ -293,6 +346,8 @@ public class Character : NetworkBehaviour
                 npc.RemoveFromSpawner();
             }
             NetworkServer.Destroy(enemy.gameObject);
+
+            RpcAwardDefeatpoints();
         }
 
         // Set immune for x seconds
@@ -301,6 +356,8 @@ public class Character : NetworkBehaviour
             Debug.Log("Setting immunity");
             RpcSetImmune();
         }
+
+
     }
 
     [ClientRpc]
@@ -415,7 +472,7 @@ public class Character : NetworkBehaviour
 
 
     /// //////////////////////////////////////////////////////
-    
+
 
 
     //[Command]
@@ -432,6 +489,42 @@ public class Character : NetworkBehaviour
     //{
     //    nickText.text = newName;
     //}
+
+    [ClientRpc]
+    public void RpcAwardDefeatpoints()
+    {
+        AwardDefeatPoints();
+    }
+
+    void AwardDropPoints()
+    {
+        // award upgrade points
+        scoreScript.ItemDropPoints();
+
+        // pop up points
+
+        Instantiate(twentyPointsPopUpField, transform.position, Quaternion.Euler(45f, 0f, 0f));
+    }
+
+    void AwardDefeatPoints()
+    {
+        // award upgrade points
+        scoreScript.EnemyDefeatPoints();
+
+        // pop up points
+
+        Instantiate(tenPointsPopUpField, transform.position, Quaternion.Euler(45f, 0f, 0f));
+    }
+
+    void AwardUpgradePoints()
+    {
+        // award upgrade points
+        scoreScript.UpgradePickupPoints();
+
+        // pop up points
+
+        Instantiate(fivePointsPopUpField, transform.position, Quaternion.Euler(45f, 0f, 0f));
+    }
 
 
 }

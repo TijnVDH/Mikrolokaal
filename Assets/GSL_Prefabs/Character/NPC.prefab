@@ -112,6 +112,14 @@ MonoBehaviour:
   UpgradedAttack: 2
   UpgradedSpeed: 0
   UpgradedSlots: 0
+  nickname: 
+  nickText: {fileID: 0}
+  fivePointsPopUpField: {fileID: 5297729869637324723, guid: 1630c9c5c26fe9b48b4c7b08951a240f,
+    type: 3}
+  tenPointsPopUpField: {fileID: 1477677413811398437, guid: a72adc63b35d65248aff6b339b3da56c,
+    type: 3}
+  twentyPointsPopUpField: {fileID: 7998818311424257209, guid: 9f67cd5d16ce8b248aaefe673e0bfc87,
+    type: 3}
 --- !u!114 &-708332778737580612
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -130,6 +138,7 @@ MonoBehaviour:
   Soup: {fileID: 0}
   spawner: {fileID: 0}
   path: {fileID: 5193629017359998980}
+  animator: {fileID: 0}
 --- !u!114 &3896224705254133228
 MonoBehaviour:
   m_ObjectHideFlags: 0
