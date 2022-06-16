@@ -52,8 +52,6 @@ public class Character : NetworkBehaviour
     [SerializeField] private TMP_Text nickText;
     [SyncVar(hook = "DisplayPlayerName")] public string playerDisplayName;
 
-    
-
     [Header("Score")]
     public GameObject fivePointsPopUpField;
     public GameObject tenPointsPopUpField;
@@ -70,11 +68,8 @@ public class Character : NetworkBehaviour
 
     // combat
     private bool isImmune = false;
-
     private List<Tween> wobbleTweens = new List<Tween>();
-
     [SyncVar] private bool isServerCharacter = false;
-
 
     public void Awake()
     {
@@ -140,17 +135,12 @@ public class Character : NetworkBehaviour
         {
             Canvas.FindObjectOfType<InventoryUI>().Init(this);
             InventorySlots = FoodInventory.CurrentSlotsAmount;
-            //CmdSendName(GameObject.FindGameObjectWithTag("Nickname_Dropdown").transform.GetComponent<NickNameHolderScript>().NickName);
         }
 
         if (isServerCharacter)
         {
             HideCharacter();
         }
-
-        //changename();
-        
-
     }
 
     private void HideCharacter()
@@ -317,7 +307,6 @@ public class Character : NetworkBehaviour
         }
     }
 
-
     public void Fight(Character enemy)
     {
         // Server handles fighting
@@ -357,8 +346,6 @@ public class Character : NetworkBehaviour
             Debug.Log("Setting immunity");
             RpcSetImmune();
         }
-
-
     }
 
     [ClientRpc]
@@ -422,8 +409,8 @@ public class Character : NetworkBehaviour
         {
             tween.Kill();
         }
-        wobbleTweens.Clear();
 
+        wobbleTweens.Clear();
         spriteTransform.localScale = Vector3.one;
     }
 
@@ -439,38 +426,6 @@ public class Character : NetworkBehaviour
         formSpriteRenderer.DOFade(1, 0);
     }
 
-    //[Command]
-    //void CmdChangeName()
-    //{
-    //    RpcChangeName();
-    //}
-
-    //[ClientRpc]
-    //void RpcChangeName()
-    //{
-    //    //nickname = !isServer ? GameObject.FindGameObjectWithTag("Nickname_Dropdown").transform.GetComponent<NickNameHolderScript>().NickName : "";
-
-
-    //    nickname = GameObject.FindGameObjectWithTag("Nickname_Dropdown").transform.GetComponent<NickNameHolderScript>().NickName;
-
-    //    nickText.text = nickname;
-
-    //    if (isServer)
-    //        nickText.text = "";
-
-
-    //}
-
-    //public override void OnStartClient()
-    //{
-    //    CmdChangeName();
-    //}
-
-
-
-
-    //////////////////////////////////////////////////////
-
     public override void OnStartClient()
     {
         CmdSendName(GameObject.FindGameObjectWithTag("Nickname_Dropdown").transform.GetComponent<NickNameHolderScript>().NickName);
@@ -479,18 +434,15 @@ public class Character : NetworkBehaviour
     [Command]
     public void CmdSendName(string playerName)
     {
-        
         playerDisplayName = playerName;
         DisplayPlayerName("Old", playerDisplayName);
-        // no rpc needed because the magic of SyncVar.
-        // a syncvar listen to data that is on the server
-        // thus, we change data on the server and ALL clients update the name with the use of the hook.
     }
 
     public void DisplayPlayerName(string oldName, string newName)
     {
-        Debug.Log(oldName + " " + newName);
         nickText.text = newName;
+        if (isServer)
+            nickText.text = "";
     }
 
     [ClientRpc]
@@ -501,33 +453,19 @@ public class Character : NetworkBehaviour
 
     void AwardDropPoints()
     {
-        // award upgrade points
         scoreScript.ItemDropPoints();
-
-        // pop up points
-
         Instantiate(twentyPointsPopUpField, transform.position, Quaternion.Euler(45f, 0f, 0f));
     }
 
     void AwardDefeatPoints()
     {
-        // award upgrade points
         scoreScript.EnemyDefeatPoints();
-
-        // pop up points
-
         Instantiate(tenPointsPopUpField, transform.position, Quaternion.Euler(45f, 0f, 0f));
     }
 
     void AwardUpgradePoints()
     {
-        // award upgrade points
         scoreScript.UpgradePickupPoints();
-
-        // pop up points
-
         Instantiate(fivePointsPopUpField, transform.position, Quaternion.Euler(45f, 0f, 0f));
     }
-
-
 }
