@@ -3,30 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 
-public class FXToggle : NetworkBehaviour
+public class SFXToggle : NetworkBehaviour
 {
-    List<AudioSource> sources = new List<AudioSource>();
+    
     bool muted = false;
 
-    void Start()
+    [ClientRpc]
+    public void ToggleSounds()
     {
-        // get all audio sources
-        object[] obj = GameObject.FindObjectsOfType(typeof(GameObject));
-        foreach (object o in obj)
-        {
-            GameObject g = (GameObject)o;
-            if(g.GetComponent<AudioSource>() != null && g.name != "Music")
-            {
-                sources.Add(g.GetComponent<AudioSource>());
-            }
-        }
-    }
+        List<AudioSource> sources = new List<AudioSource>();
 
-    // Update is called once per frame
-    void Update()
-    {
-        // refresh list
-        sources.Clear();
         object[] obj = GameObject.FindObjectsOfType(typeof(GameObject));
         foreach (object o in obj)
         {
@@ -36,12 +22,8 @@ public class FXToggle : NetworkBehaviour
                 sources.Add(g.GetComponent<AudioSource>());
             }
         }
-    }
 
-    [ClientRpc]
-    public void ToggleSounds()
-    {
-        if(muted)
+        if (muted)
         {
             foreach (AudioSource source in sources)
             {

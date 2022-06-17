@@ -13,11 +13,8 @@ public class NPC : NetworkBehaviour
     public NPCSpawner spawner;
     public NPCPath path;
 
-    AudioSource defeatSound;
-
 	private void Awake()
 	{
-        defeatSound = GetComponent<AudioSource>();
         path.OnReachedTarget += () =>
         {
             if (!isServer) return;
@@ -48,11 +45,5 @@ public class NPC : NetworkBehaviour
     public void RemoveFromSpawner()
     {
         spawner.RemoveFromList(this);
-    }
-
-    // when the enemy is destroyed
-    private void OnDestroy()
-    {
-        defeatSound.Play();
     }
 }

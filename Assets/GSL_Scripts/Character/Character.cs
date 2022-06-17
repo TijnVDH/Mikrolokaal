@@ -58,8 +58,30 @@ public class Character : NetworkBehaviour
 
     [SyncVar] private bool isServerCharacter = false;
 
+    [Header("Audio")]
+    public AudioClip enemyDefeat1;
+    public AudioClip enemyDefeat2;
+    public AudioClip enemyDefeat3;
+    public AudioClip speedUpgradePickup;
+    public AudioClip attackUpgradePickup;
+    public AudioClip carryUpgradePickup;
+    public AudioClip itemPickup1;
+    public AudioClip itemPickup2;
+    public AudioClip itemPickup3;
+
+    AudioSource audioSrc;
+
+    bool justFought = false;
     public void Awake()
     {
+        if(CharacterType == CharacterType.Player)
+        {
+            // add an audiolistener to the local scene
+            GameObject.Find("Camera").AddComponent(typeof(AudioListener));
+
+            audioSrc = GameObject.Find("Camera").GetComponent<AudioSource>();
+        }
+        
         defaultAttack = AttackStrength;
         defaultSlots = InventorySlots;
         defaultSpeed = MovementSpeed;
@@ -140,6 +162,7 @@ public class Character : NetworkBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        
         // colliding with a character?
         Character enemy = collision.gameObject.GetComponent<Character>();
         if (enemy != null)
@@ -148,6 +171,11 @@ public class Character : NetworkBehaviour
             if (CharacterType == CharacterType.Virus)
                 return;
 
+            if(!isServer && isLocalPlayer && AttackStrength >= enemy.AttackStrength && !isImmune && !enemy.isImmune && !justFought)
+            {
+                PlayEnemyDefeatAudio();
+                justFought = true;
+            }
             Fight(enemy);
         }
     }
@@ -162,6 +190,12 @@ public class Character : NetworkBehaviour
         {
             // ask the server to handle the pickup
             CmdPickUpFood(food);
+
+            if(FoodInventory.HasSpace())
+            {
+                //pickup food sound effect
+                PlayItemPickupAudio();
+            }
         }
 
         Upgrader upgrader = other.gameObject.GetComponent<Upgrader>();
@@ -169,6 +203,10 @@ public class Character : NetworkBehaviour
         {
             // ask the server to handle the upgrade
             CmdUpgrade(upgrader.UpgradeType);
+
+            //play upgrade sound effect
+            if(upgrader.UpgradeType != ActiveUpgrade)
+                PlayUpgradeAudio(upgrader.UpgradeType);
         }
     }
 
@@ -240,8 +278,7 @@ public class Character : NetworkBehaviour
         }
     }
 
-
-    public void Fight(Character enemy)
+    private void Fight(Character enemy)
     {
         // Server handles fighting
         if (!isServer)
@@ -250,10 +287,11 @@ public class Character : NetworkBehaviour
         // No combat if anyone is immune
         if (isImmune || enemy.isImmune)
             return;
-
         // No infighting
         if (CharacterType == enemy.CharacterType)
+        {
             return;
+        }
 
         // Compare the attack values
         if (enemy.AttackStrength > AttackStrength)
@@ -352,8 +390,102 @@ public class Character : NetworkBehaviour
 
         yield return new WaitForSeconds(ImmunityTime);
 
+        justFought = false;
         isImmune = false;
         blinkTween.Kill();
         formSpriteRenderer.DOFade(1, 0);
+    }
+
+    // public methods to play audio clips
+
+    // play a random 1 out of 3 different enemy defeat sounds
+    public void PlayEnemyDefeatAudio()
+    {
+        Debug.Log("in audio");
+        if (CharacterType != CharacterType.Player)
+            return;
+
+
+        if (isServer)
+        {
+            Debug.Log("server in audio method");
+            return;
+        }
+
+        int clip = Random.Range(0, 2);
+        switch (clip)
+        {
+            case 0:
+                {
+                    audioSrc.PlayOneShot(enemyDefeat1, 1);
+                    break;
+                }
+            case 1:
+                {
+                    audioSrc.PlayOneShot(enemyDefeat2, 1);
+                    break;
+                }
+            case 2:
+                {
+                    audioSrc.PlayOneShot(enemyDefeat3, 1);
+                    break;
+                }
+            default: break;
+        }
+    }
+
+    // play a random 1 out of 3 different item pickup sounds
+    public void PlayItemPickupAudio()
+    {
+        if (CharacterType != CharacterType.Player)
+            return;
+
+        int clip = Random.Range(0, 2);
+        switch (clip)
+        {
+            case 0:
+                {
+                    audioSrc.PlayOneShot(itemPickup1, 1);
+                    break;
+                }
+            case 1:
+                {
+                    audioSrc.PlayOneShot(itemPickup2, 1);
+                    break;
+                }
+            case 2:
+                {
+                    audioSrc.PlayOneShot(itemPickup3, 1);
+                    break;
+                }
+            default: break;
+        }
+    }
+
+    // plays the appropriate upgrade sound effect based on the type of the upgrade
+    public void PlayUpgradeAudio(UpgradeType upgradeType)
+    {
+        if (CharacterType != CharacterType.Player)
+            return;
+
+        switch (upgradeType)
+        {
+            case UpgradeType.SPEED:
+                {
+                    audioSrc.PlayOneShot(speedUpgradePickup, 1);
+                    break;
+                }
+            case UpgradeType.CARRY:
+                {
+                    audioSrc.PlayOneShot(carryUpgradePickup, 1);
+                    break;
+                }
+            case UpgradeType.ATTACK:
+                {
+                    audioSrc.PlayOneShot(attackUpgradePickup, 1);
+                    break;
+                }
+            default: break;
+        }
     }
 }

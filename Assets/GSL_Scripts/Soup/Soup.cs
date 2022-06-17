@@ -30,6 +30,13 @@ public class Soup : NetworkBehaviour
 	public SoupIndicator Indicator;
 	public int UrgentThreshold = 3;
 
+	[Header("Audio")]
+	public AudioClip itemDrop1;
+	public AudioClip itemDrop2;
+	public AudioClip itemDrop3;
+	public GameObject audioPlace;
+	AudioSource audioSrc;
+
 	public int MaxFoodDifference { get => soupContent.Values.Max() - soupContent.Values.Min(); }
 
 	private Dictionary<FoodType, int> soupContent = new Dictionary<FoodType, int>();
@@ -42,10 +49,14 @@ public class Soup : NetworkBehaviour
 
 	private SoupState CurrentState;
 
-	public AudioSource dropSound;
+    private void Awake()
+    {
+		audioSrc = audioPlace.GetComponent<AudioSource>();
+	}
 
-	private void Start()
+    private void Start()
 	{
+
 		CurrentState = SoupState.INACTIVE;
 		SoupSprite.sprite = InactiveSoupSprite;
 
@@ -82,43 +93,43 @@ public class Soup : NetworkBehaviour
 		{
 			NetworkServer.Destroy(food.gameObject);
 			RpcAddFood(food.FoodType, 1);
+			PlayItemDropAudio();
 		}
 	}
 
-	[ClientRpc] public void RpcAddFood(FoodType type, int amount)
-    {
-        if (!RequiredFoodTypes.Contains(type))
-        {
-            Debug.Log("Soup: Food type not accepted");
-            return;
-        }
+	[ClientRpc]
+	public void RpcAddFood(FoodType type, int amount)
+	{
+		if (!RequiredFoodTypes.Contains(type))
+		{
+			Debug.Log("Soup: Food type not accepted");
+			return;
+		}
 
-        if (soupContent.ContainsKey(type))
-        {
-            soupContent[type] += amount;
-        }
-        else
-        {
-            soupContent.Add(type, amount);
-        }
+		if (soupContent.ContainsKey(type))
+		{
+			soupContent[type] += amount;
+		}
+		else
+		{
+			soupContent.Add(type, amount);
+		}
 
-        Debug.Log("==SOUP CONTENT==");
-        foreach (KeyValuePair<FoodType, int> foodkvp in soupContent)
-        {
-            Debug.Log(foodkvp.Key + ": " + foodkvp.Value);
-        }
+		Debug.Log("==SOUP CONTENT==");
+		foreach (KeyValuePair<FoodType, int> foodkvp in soupContent)
+		{
+			Debug.Log(foodkvp.Key + ": " + foodkvp.Value);
+		}
 
-        AnimateBubbles();
-        PlayDropSound();
-        UpdateSoupState();
-        UpdateIndicators();
-        if (isServer) UpdateHostIndicators();
-    }
-
-    private void PlayDropSound()
-    {
-		dropSound.PlayDelayed(2);
-    }
+		AnimateBubbles();
+		UpdateSoupState();
+		UpdateIndicators();
+		if (isServer)
+		{
+			UpdateHostIndicators();
+			//PlayItemDropAudio();
+		}
+	}
 
     [ClientRpc] public void RpcRemoveFood(FoodType type, int amount)
 	{
@@ -259,5 +270,30 @@ public class Soup : NetworkBehaviour
 		}
 
 		OnStateChange(newState);
+	}
+
+	// play a random 1 out of 3 different item drop sounds
+	public void PlayItemDropAudio()
+	{
+		int clip = Random.Range(0, 2);
+		switch (clip)
+		{
+			case 0:
+				{
+					audioSrc.PlayOneShot(itemDrop1, 1);
+					break;
+				}
+			case 1:
+				{
+					audioSrc.PlayOneShot(itemDrop2, 1);
+					break;
+				}
+			case 2:
+				{
+					audioSrc.PlayOneShot(itemDrop3, 1);
+					break;
+				}
+			default: break;
+		}
 	}
 }
