@@ -30,6 +30,13 @@ public class Soup : NetworkBehaviour
 	public SoupIndicator Indicator;
 	public int UrgentThreshold = 3;
 
+	[Header("Audio")]
+	public AudioClip itemDrop1;
+	public AudioClip itemDrop2;
+	public AudioClip itemDrop3;
+	public GameObject audioPlace;
+	AudioSource audioSrc;
+
 	public int MaxFoodDifference { get => soupContent.Values.Max() - soupContent.Values.Min(); }
 
 	public Dictionary<FoodType, int> soupContent = new Dictionary<FoodType, int>();
@@ -41,6 +48,11 @@ public class Soup : NetworkBehaviour
 	public delegate void SoupContentAction(int square, int circle, int triangle);
 
 	private SoupState CurrentState;
+
+	private void Awake()
+	{
+		audioSrc = audioPlace.GetComponent<AudioSource>();
+	}
 
 	private void Start()
 	{
@@ -81,6 +93,7 @@ public class Soup : NetworkBehaviour
 		{
 			NetworkServer.Destroy(food.gameObject);
 			RpcAddFood(food.FoodType, 1);
+			PlayItemDropAudio();
 		}
 	}
 
@@ -261,5 +274,30 @@ public class Soup : NetworkBehaviour
 	public Dictionary<FoodType, int> getSoupContents()
 	{
 		return soupContent;
+	}
+
+	// play a random 1 out of 3 different item drop sounds
+	public void PlayItemDropAudio()
+	{
+		int clip = Random.Range(0, 2);
+		switch (clip)
+		{
+			case 0:
+				{
+					audioSrc.PlayOneShot(itemDrop1, 1);
+					break;
+				}
+			case 1:
+				{
+					audioSrc.PlayOneShot(itemDrop2, 1);
+					break;
+				}
+			case 2:
+				{
+					audioSrc.PlayOneShot(itemDrop3, 1);
+					break;
+				}
+			default: break;
+		}
 	}
 }

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Mirror;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PauseOverlay : NetworkBehaviour
 {
@@ -9,7 +10,17 @@ public class PauseOverlay : NetworkBehaviour
 
     [SyncVar]public bool isPaused;
     private bool oldPaused;
+    public GameObject musicButtonHolder;
+    public GameObject soundButtonHolder;
 
+    Button musicButton;
+    Button soundButton;
+
+    private void Awake()
+    {
+        musicButton = musicButtonHolder.GetComponent<Button>();
+        soundButton = soundButtonHolder.GetComponent<Button>();
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -32,7 +43,8 @@ public class PauseOverlay : NetworkBehaviour
     
     public void RpcTogglePause() {
         // toggle pause state
-        isPaused = !isPaused;               
+        isPaused = !isPaused;
+        toggleSoundButtons();
     }
 
     public override void OnStartClient()
@@ -50,5 +62,19 @@ public class PauseOverlay : NetworkBehaviour
     public void RpcSendPausedState(bool _state)
     {
         isPaused = _state;
+    }
+
+    void toggleSoundButtons()
+    {
+        if (isPaused)
+        {
+            musicButton.interactable = false;
+            soundButton.interactable = false;
+        }
+        else
+        {
+            musicButton.interactable = true;
+            soundButton.interactable = true;
+        }
     }
 }

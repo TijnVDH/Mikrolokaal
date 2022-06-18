@@ -489,14 +489,23 @@ MonoBehaviour:
   UpgradedAttack: 2
   UpgradedSpeed: 14
   UpgradedSlots: 3
-  nickname: PLACEHOLDER
   nickText: {fileID: 7681372086553771729}
+  playerDisplayName: 
   fivePointsPopUpField: {fileID: 5297729869637324723, guid: 1630c9c5c26fe9b48b4c7b08951a240f,
     type: 3}
   tenPointsPopUpField: {fileID: 1477677413811398437, guid: a72adc63b35d65248aff6b339b3da56c,
     type: 3}
   twentyPointsPopUpField: {fileID: 7998818311424257209, guid: 9f67cd5d16ce8b248aaefe673e0bfc87,
     type: 3}
+  enemyDefeat1: {fileID: 8300000, guid: a245ac773194142cfa12c21de3e0980b, type: 3}
+  enemyDefeat2: {fileID: 8300000, guid: a245ac773194142cfa12c21de3e0980b, type: 3}
+  enemyDefeat3: {fileID: 8300000, guid: a245ac773194142cfa12c21de3e0980b, type: 3}
+  speedUpgradePickup: {fileID: 8300000, guid: a245ee5d75348c84a89ffb7992f1dc82, type: 3}
+  attackUpgradePickup: {fileID: 8300000, guid: 21ba4f1a293a2487587068d7bbe15106, type: 3}
+  carryUpgradePickup: {fileID: 8300000, guid: 5e1a9f876d3dafd47bc6b3dde25135fa, type: 3}
+  itemPickup1: {fileID: 8300000, guid: 792a6e132d38a4f70bbae7f091a6cab3, type: 3}
+  itemPickup2: {fileID: 8300000, guid: 792a6e132d38a4f70bbae7f091a6cab3, type: 3}
+  itemPickup3: {fileID: 8300000, guid: 792a6e132d38a4f70bbae7f091a6cab3, type: 3}
 --- !u!114 &5610777206590781507
 MonoBehaviour:
   m_ObjectHideFlags: 0
