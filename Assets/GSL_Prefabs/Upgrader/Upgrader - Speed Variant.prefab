@@ -88,5 +88,11 @@ PrefabInstance:
       propertyPath: UpgradeType
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 8170084757245266594, guid: 9944efbaab9b1944b8f35cd8a86ea26b,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: cadc874cc1809b048a2ee2a90f366cea,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9944efbaab9b1944b8f35cd8a86ea26b, type: 3}

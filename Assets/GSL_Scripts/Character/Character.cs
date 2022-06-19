@@ -77,6 +77,10 @@ public class Character : NetworkBehaviour
 
     bool justFought = false;
 
+    public GameObject minimapIcon;
+
+    GameObject minimap;
+
     // Soup
     private GameObject soup;
     private Soup soupScript;
@@ -137,6 +141,22 @@ public class Character : NetworkBehaviour
 
         // initialise form
         ChangeForm();
+
+        // minimap
+        minimap = GameObject.Find("Minimap");
+        if (minimap != null)
+        {
+            if (CharacterType == CharacterType.Player && !isServer)
+            {
+                minimapIcon = gameObject.transform.Find("Minimap Sprite").gameObject;
+                minimap.GetComponent<Minimap>().SetPlayer(gameObject);
+
+            }
+            else
+            {
+                minimap.SetActive(false);
+            }
+        }
     }
 
     public void Start()
