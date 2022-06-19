@@ -19,7 +19,7 @@ GameObject:
   - component: {fileID: 8995131033628767077}
   - component: {fileID: 6397908899655324272}
   - component: {fileID: 5193629017359998980}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: NPC
   m_TagString: Untagged
   m_Icon: {fileID: 3306451490063965843, guid: 0000000000000000d000000000000000, type: 0}
@@ -281,7 +281,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8800085966129580326}
   - component: {fileID: 2594537822226225612}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -364,7 +364,7 @@ GameObject:
   m_Component:
   - component: {fileID: 113741153702334785}
   - component: {fileID: 549615434553795029}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Shadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -443,6 +443,46 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8800085966129580326}
     m_Modifications:
+    - target: {fileID: 548784379949401453, guid: d6c4dc29aa071584680f190f13bbbd95,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1567815576995236264, guid: d6c4dc29aa071584680f190f13bbbd95,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2290223063215430482, guid: d6c4dc29aa071584680f190f13bbbd95,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3775217467399452180, guid: d6c4dc29aa071584680f190f13bbbd95,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4058161601290708652, guid: d6c4dc29aa071584680f190f13bbbd95,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4116499456303271475, guid: d6c4dc29aa071584680f190f13bbbd95,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4751107783101182787, guid: d6c4dc29aa071584680f190f13bbbd95,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5644517989084162843, guid: d6c4dc29aa071584680f190f13bbbd95,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 6261293169533200928, guid: d6c4dc29aa071584680f190f13bbbd95,
         type: 3}
       propertyPath: m_RootOrder
@@ -498,10 +538,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7352391535313330813, guid: d6c4dc29aa071584680f190f13bbbd95,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7530407803257112440, guid: d6c4dc29aa071584680f190f13bbbd95,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 8019397078089882377, guid: d6c4dc29aa071584680f190f13bbbd95,
         type: 3}
       propertyPath: m_Name
       value: Food Inventory Display
+      objectReference: {fileID: 0}
+    - target: {fileID: 8019397078089882377, guid: d6c4dc29aa071584680f190f13bbbd95,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d6c4dc29aa071584680f190f13bbbd95, type: 3}

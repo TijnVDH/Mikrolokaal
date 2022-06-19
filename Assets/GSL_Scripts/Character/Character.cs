@@ -50,6 +50,11 @@ public class Character : NetworkBehaviour
     private float defaultSpeed;
     private int defaultSlots;
 
+    public GameObject minimapIcon;
+
+    GameObject minimap;
+
+
     // combat
     private bool isImmune = false;
 
@@ -96,6 +101,22 @@ public class Character : NetworkBehaviour
 
         // initialise form
         ChangeForm();
+
+        // minimap
+        minimap = GameObject.Find("Minimap");
+        if (minimap != null)
+        {
+            if (CharacterType == CharacterType.Player && !isServer)
+            {
+                minimapIcon = gameObject.transform.Find("Minimap Sprite").gameObject;
+                minimap.GetComponent<Minimap>().SetPlayer(gameObject);
+
+            }
+            else
+            {
+                minimap.SetActive(false);
+            }
+        }
     }
 
     public void Start()
