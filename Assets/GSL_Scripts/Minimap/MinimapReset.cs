@@ -9,7 +9,7 @@ public class MinimapReset : MonoBehaviour
     void Start()
     {
         minimap = GameObject.Find("MinimapWindow");
-        if(gameObject.GetComponent<Character>() != null)
+        if(gameObject.GetComponent<Character>() != null && minimap != null)
         {
             if(gameObject.GetComponent<Character>().isServer)
             {
