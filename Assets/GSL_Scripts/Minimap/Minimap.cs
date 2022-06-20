@@ -9,22 +9,23 @@ public class Minimap : MonoBehaviour
     private void LateUpdate()
     {
         //followPlayer();
-    }
 
-    public void SetPlayer(GameObject player)
-    {
-        localPlayer = player;
-        
-        foreach(GameObject obj in GameObject.FindObjectsOfType(typeof(GameObject)))
+        // refresh
+        foreach (GameObject obj in GameObject.FindObjectsOfType(typeof(GameObject)))
         {
-            if(obj.GetComponent<Character>() != null)
+            if (obj.GetComponent<Character>() != null)
             {
-                if(obj.GetComponent<Character>().CharacterType == CharacterType.Player && obj != localPlayer)
+                if (obj.GetComponent<Character>().CharacterType == CharacterType.Player && obj != localPlayer)
                 {
                     obj.GetComponent<Character>().minimapIcon.SetActive(false);
                 }
             }
         }
+    }
+
+    public void SetPlayer(GameObject player)
+    {
+        localPlayer = player;
     }
 
     void followPlayer()

@@ -1883,7 +1883,7 @@ SpriteShapeRenderer:
   m_SortingLayerID: -894337699
   m_SortingLayer: 1
   m_SortingOrder: 1
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.38431373, g: 0.70980394, b: 1, a: 1}
   m_MaskInteraction: 0
   m_ShapeTexture: {fileID: 2800000, guid: ba86fadc88b534cd7ac0aa8335520c19, type: 3}
   m_Sprites:
@@ -3215,8 +3215,9 @@ Transform:
   - {fileID: 807963104}
   - {fileID: 1412414681}
   - {fileID: 800085126}
+  - {fileID: 1149240053}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &95438584
 PrefabInstance:
@@ -4056,7 +4057,7 @@ MonoBehaviour:
       spriteIndex: 0
       corner: 1
       m_CornerMode: 1
-  m_SpriteShape: {fileID: 11400000, guid: 1d1cb527b87df9248bc1c6438d42061d, type: 2}
+  m_SpriteShape: {fileID: 11400000, guid: 58dfd26a64a3ca24e857913814670e17, type: 2}
   m_FillPixelPerUnit: 100
   m_StretchTiling: 1
   m_SplineDetail: 16
@@ -4113,9 +4114,9 @@ SpriteShapeRenderer:
   m_SortingLayerID: -894337699
   m_SortingLayer: 1
   m_SortingOrder: 1
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.972549, g: 0.9372549, b: 0.78431374, a: 1}
   m_MaskInteraction: 0
-  m_ShapeTexture: {fileID: 2800000, guid: f80da65a402844153a8d82ee2df5cfe1, type: 3}
+  m_ShapeTexture: {fileID: 2800000, guid: e572022e2c6a94036999b3fd7d8f6f14, type: 3}
   m_Sprites:
   - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
   - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
@@ -4766,7 +4767,7 @@ SpriteShapeRenderer:
   m_SortingLayerID: -894337699
   m_SortingLayer: 1
   m_SortingOrder: 1
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.38431373, g: 0.70980394, b: 1, a: 1}
   m_MaskInteraction: 0
   m_ShapeTexture: {fileID: 2800000, guid: ba86fadc88b534cd7ac0aa8335520c19, type: 3}
   m_Sprites:
@@ -6455,7 +6456,7 @@ SpriteShapeRenderer:
   m_SortingLayerID: -894337699
   m_SortingLayer: 1
   m_SortingOrder: 1
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.972549, g: 0.9372549, b: 0.78431374, a: 1}
   m_MaskInteraction: 0
   m_ShapeTexture: {fileID: 2800000, guid: e572022e2c6a94036999b3fd7d8f6f14, type: 3}
   m_Sprites:
@@ -7902,7 +7903,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &235317286
 PrefabInstance:
@@ -12416,7 +12417,7 @@ SpriteShapeRenderer:
   m_SortingLayerID: -894337699
   m_SortingLayer: 1
   m_SortingOrder: 1
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.972549, g: 0.9372549, b: 0.78431374, a: 1}
   m_MaskInteraction: 0
   m_ShapeTexture: {fileID: 2800000, guid: e572022e2c6a94036999b3fd7d8f6f14, type: 3}
   m_Sprites:
@@ -19403,7 +19404,7 @@ SpriteShapeRenderer:
   m_SortingLayerID: -894337699
   m_SortingLayer: 1
   m_SortingOrder: 1
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.38431373, g: 0.70980394, b: 1, a: 1}
   m_MaskInteraction: 0
   m_ShapeTexture: {fileID: 2800000, guid: ba86fadc88b534cd7ac0aa8335520c19, type: 3}
   m_Sprites:
@@ -21664,7 +21665,7 @@ SpriteShapeRenderer:
   m_SortingLayerID: -894337699
   m_SortingLayer: 1
   m_SortingOrder: 1
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.38431373, g: 0.70980394, b: 1, a: 1}
   m_MaskInteraction: 0
   m_ShapeTexture: {fileID: 2800000, guid: ba86fadc88b534cd7ac0aa8335520c19, type: 3}
   m_Sprites:
@@ -22209,7 +22210,7 @@ SpriteShapeRenderer:
   m_SortingLayerID: -894337699
   m_SortingLayer: 1
   m_SortingOrder: 1
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.972549, g: 0.9372549, b: 0.78431374, a: 1}
   m_MaskInteraction: 0
   m_ShapeTexture: {fileID: 2800000, guid: e572022e2c6a94036999b3fd7d8f6f14, type: 3}
   m_Sprites:
@@ -22830,7 +22831,7 @@ SpriteShapeRenderer:
   m_SortingLayerID: -894337699
   m_SortingLayer: 1
   m_SortingOrder: 1
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.972549, g: 0.9372549, b: 0.78431374, a: 1}
   m_MaskInteraction: 0
   m_ShapeTexture: {fileID: 2800000, guid: e572022e2c6a94036999b3fd7d8f6f14, type: 3}
   m_Sprites:
@@ -24816,7 +24817,7 @@ SpriteShapeRenderer:
   m_SortingLayerID: -894337699
   m_SortingLayer: 1
   m_SortingOrder: 1
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.972549, g: 0.9372549, b: 0.78431374, a: 1}
   m_MaskInteraction: 0
   m_ShapeTexture: {fileID: 2800000, guid: e572022e2c6a94036999b3fd7d8f6f14, type: 3}
   m_Sprites:
@@ -27969,7 +27970,7 @@ SpriteShapeRenderer:
   m_SortingLayerID: -894337699
   m_SortingLayer: 1
   m_SortingOrder: 1
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.972549, g: 0.9372549, b: 0.78431374, a: 1}
   m_MaskInteraction: 0
   m_ShapeTexture: {fileID: 2800000, guid: e572022e2c6a94036999b3fd7d8f6f14, type: 3}
   m_Sprites:
@@ -29495,7 +29496,7 @@ SpriteShapeRenderer:
   m_SortingLayerID: -894337699
   m_SortingLayer: 1
   m_SortingOrder: 1
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.38431373, g: 0.70980394, b: 1, a: 1}
   m_MaskInteraction: 0
   m_ShapeTexture: {fileID: 2800000, guid: ba86fadc88b534cd7ac0aa8335520c19, type: 3}
   m_Sprites:
@@ -32047,7 +32048,7 @@ SpriteShapeRenderer:
   m_SortingLayerID: -894337699
   m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Color: {r: 0.9811321, g: 0.7429716, b: 0.43040225, a: 1}
+  m_Color: {r: 1, g: 0.7019608, b: 0.3137255, a: 1}
   m_MaskInteraction: 0
   m_ShapeTexture: {fileID: 2800000, guid: e572022e2c6a94036999b3fd7d8f6f14, type: 3}
   m_Sprites:
@@ -35209,7 +35210,7 @@ MonoBehaviour:
       spriteIndex: 0
       corner: 1
       m_CornerMode: 1
-  m_SpriteShape: {fileID: 11400000, guid: 1d1cb527b87df9248bc1c6438d42061d, type: 2}
+  m_SpriteShape: {fileID: 11400000, guid: 87de5dc74be8846429aa0e78f36fd2d8, type: 2}
   m_FillPixelPerUnit: 100
   m_StretchTiling: 1
   m_SplineDetail: 16
@@ -35266,9 +35267,9 @@ SpriteShapeRenderer:
   m_SortingLayerID: -894337699
   m_SortingLayer: 1
   m_SortingOrder: 17
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.38431373, g: 0.70980394, b: 1, a: 1}
   m_MaskInteraction: 0
-  m_ShapeTexture: {fileID: 2800000, guid: f80da65a402844153a8d82ee2df5cfe1, type: 3}
+  m_ShapeTexture: {fileID: 2800000, guid: ba86fadc88b534cd7ac0aa8335520c19, type: 3}
   m_Sprites:
   - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
   - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
@@ -37755,7 +37756,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1149240052}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -3.2647445, y: -10.682423, z: -20.494904}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -37766,8 +37767,8 @@ Transform:
   - {fileID: 204516825}
   - {fileID: 437117640}
   - {fileID: 1680967637}
-  m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_Father: {fileID: 90887504}
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1149982987
 PrefabInstance:
@@ -43393,7 +43394,7 @@ SpriteShapeRenderer:
   m_SortingLayerID: -894337699
   m_SortingLayer: 1
   m_SortingOrder: 1
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.38431373, g: 0.70980394, b: 1, a: 1}
   m_MaskInteraction: 0
   m_ShapeTexture: {fileID: 2800000, guid: ba86fadc88b534cd7ac0aa8335520c19, type: 3}
   m_Sprites:
@@ -46198,11 +46199,16 @@ PrefabInstance:
     - target: {fileID: 273203972156596567, guid: ee96bd50fe362e8419c7fdf6079cffcb,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 273203972156596567, guid: ee96bd50fe362e8419c7fdf6079cffcb,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 273203972156596567, guid: ee96bd50fe362e8419c7fdf6079cffcb,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 273203972156596567, guid: ee96bd50fe362e8419c7fdf6079cffcb,
@@ -46212,7 +46218,17 @@ PrefabInstance:
       objectReference: {fileID: 461940415}
     - target: {fileID: 273203972156596567, guid: ee96bd50fe362e8419c7fdf6079cffcb,
         type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
+      value: 
+      objectReference: {fileID: 1680967635}
+    - target: {fileID: 273203972156596567, guid: ee96bd50fe362e8419c7fdf6079cffcb,
+        type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 273203972156596567, guid: ee96bd50fe362e8419c7fdf6079cffcb,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 273203972156596567, guid: ee96bd50fe362e8419c7fdf6079cffcb,
@@ -46222,12 +46238,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 273203972156596567, guid: ee96bd50fe362e8419c7fdf6079cffcb,
         type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
+      value: GamePause
+      objectReference: {fileID: 0}
+    - target: {fileID: 273203972156596567, guid: ee96bd50fe362e8419c7fdf6079cffcb,
+        type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
       value: PauseOverlay, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 273203972156596567, guid: ee96bd50fe362e8419c7fdf6079cffcb,
         type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
+      value: MusicToggle, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 273203972156596567, guid: ee96bd50fe362e8419c7fdf6079cffcb,
+        type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 273203972156596567, guid: ee96bd50fe362e8419c7fdf6079cffcb,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 1036208517441961224, guid: ee96bd50fe362e8419c7fdf6079cffcb,
@@ -47460,7 +47491,7 @@ Transform:
   m_Children:
   - {fileID: 574041494}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1445235504
 PrefabInstance:
@@ -49030,7 +49061,7 @@ PrefabInstance:
     - target: {fileID: 407334724570868997, guid: 50c5990b5c38bea4c96fd3687cca1c2c,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 2051
+      value: 1755.7
       objectReference: {fileID: 0}
     - target: {fileID: 407334724570868997, guid: 50c5990b5c38bea4c96fd3687cca1c2c,
         type: 3}
@@ -49075,7 +49106,7 @@ PrefabInstance:
     - target: {fileID: 407334724570868997, guid: 50c5990b5c38bea4c96fd3687cca1c2c,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -2050
+      value: -1754.7
       objectReference: {fileID: 0}
     - target: {fileID: 407334724570868997, guid: 50c5990b5c38bea4c96fd3687cca1c2c,
         type: 3}
@@ -49849,7 +49880,7 @@ SpriteShapeRenderer:
   m_SortingLayerID: -894337699
   m_SortingLayer: 1
   m_SortingOrder: 1
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.972549, g: 0.9372549, b: 0.78431374, a: 1}
   m_MaskInteraction: 0
   m_ShapeTexture: {fileID: 2800000, guid: e572022e2c6a94036999b3fd7d8f6f14, type: 3}
   m_Sprites:
@@ -53250,7 +53281,7 @@ SpriteShapeRenderer:
   m_SortingLayerID: -894337699
   m_SortingLayer: 1
   m_SortingOrder: 1
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.972549, g: 0.9372549, b: 0.78431374, a: 1}
   m_MaskInteraction: 0
   m_ShapeTexture: {fileID: 2800000, guid: e572022e2c6a94036999b3fd7d8f6f14, type: 3}
   m_Sprites:
@@ -54093,7 +54124,7 @@ SpriteShapeRenderer:
   m_SortingLayerID: -894337699
   m_SortingLayer: 1
   m_SortingOrder: 1
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.38431373, g: 0.70980394, b: 1, a: 1}
   m_MaskInteraction: 0
   m_ShapeTexture: {fileID: 2800000, guid: ba86fadc88b534cd7ac0aa8335520c19, type: 3}
   m_Sprites:
@@ -55973,7 +56004,7 @@ PrefabInstance:
     - target: {fileID: 6323773029761461150, guid: b7c0288a20f5fdd409cf479d0b813e3b,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: GamePause
+      value: ToggleMusic
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b7c0288a20f5fdd409cf479d0b813e3b, type: 3}
@@ -59131,7 +59162,7 @@ SpriteShapeRenderer:
   m_SortingLayerID: -894337699
   m_SortingLayer: 1
   m_SortingOrder: 1
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.38431373, g: 0.70980394, b: 1, a: 1}
   m_MaskInteraction: 0
   m_ShapeTexture: {fileID: 2800000, guid: ba86fadc88b534cd7ac0aa8335520c19, type: 3}
   m_Sprites:
@@ -59290,7 +59321,7 @@ SpriteShapeRenderer:
   m_SortingLayerID: -894337699
   m_SortingLayer: 1
   m_SortingOrder: 1
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.972549, g: 0.9372549, b: 0.78431374, a: 1}
   m_MaskInteraction: 0
   m_ShapeTexture: {fileID: 2800000, guid: e572022e2c6a94036999b3fd7d8f6f14, type: 3}
   m_Sprites:
@@ -59899,7 +59930,7 @@ SpriteShapeRenderer:
   m_SortingLayerID: -894337699
   m_SortingLayer: 1
   m_SortingOrder: 1
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.38431373, g: 0.70980394, b: 1, a: 1}
   m_MaskInteraction: 0
   m_ShapeTexture: {fileID: 2800000, guid: ba86fadc88b534cd7ac0aa8335520c19, type: 3}
   m_Sprites:
@@ -60896,7 +60927,7 @@ SpriteShapeRenderer:
   m_SortingLayerID: -894337699
   m_SortingLayer: 1
   m_SortingOrder: 1
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.38431373, g: 0.70980394, b: 1, a: 1}
   m_MaskInteraction: 0
   m_ShapeTexture: {fileID: 2800000, guid: ba86fadc88b534cd7ac0aa8335520c19, type: 3}
   m_Sprites:
@@ -64403,7 +64434,7 @@ SpriteShapeRenderer:
   m_SortingLayerID: -894337699
   m_SortingLayer: 1
   m_SortingOrder: 1
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.972549, g: 0.9372549, b: 0.78431374, a: 1}
   m_MaskInteraction: 0
   m_ShapeTexture: {fileID: 2800000, guid: e572022e2c6a94036999b3fd7d8f6f14, type: 3}
   m_Sprites:
@@ -65958,7 +65989,7 @@ SpriteShapeRenderer:
   m_SortingLayerID: -894337699
   m_SortingLayer: 1
   m_SortingOrder: 1
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.972549, g: 0.9372549, b: 0.78431374, a: 1}
   m_MaskInteraction: 0
   m_ShapeTexture: {fileID: 2800000, guid: e572022e2c6a94036999b3fd7d8f6f14, type: 3}
   m_Sprites:

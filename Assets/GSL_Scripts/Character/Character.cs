@@ -80,6 +80,7 @@ public class Character : NetworkBehaviour
     public GameObject minimapIcon;
 
     GameObject minimap;
+    GameObject minimapCamera;
 
     // Soup
     private GameObject soup;
@@ -88,7 +89,7 @@ public class Character : NetworkBehaviour
     // combat
     private bool isImmune = false;
     private List<Tween> wobbleTweens = new List<Tween>();
-    [SyncVar] private bool isServerCharacter = false;
+    [SyncVar] public bool isServerCharacter = false;
 
     public void Awake()
     {
@@ -141,22 +142,6 @@ public class Character : NetworkBehaviour
 
         // initialise form
         ChangeForm();
-
-        // minimap
-        minimap = GameObject.Find("Minimap");
-        if (minimap != null)
-        {
-            if (CharacterType == CharacterType.Player && !isServer)
-            {
-                minimapIcon = gameObject.transform.Find("Minimap Sprite").gameObject;
-                minimap.GetComponent<Minimap>().SetPlayer(gameObject);
-
-            }
-            else
-            {
-                minimap.SetActive(false);
-            }
-        }
     }
 
     public void Start()
@@ -183,6 +168,15 @@ public class Character : NetworkBehaviour
         if (isServerCharacter)
         {
             HideCharacter();
+        }
+
+        // minimap
+        minimap = GameObject.Find("MinimapWindow");
+        minimapCamera = GameObject.Find("Minimap Camera");
+        if (CharacterType == CharacterType.Player && !isServer && isLocalPlayer)
+        {
+            minimapIcon = gameObject.transform.Find("Minimap Sprite").gameObject;
+            minimapCamera.GetComponent<Minimap>().SetPlayer(gameObject);
         }
     }
 
@@ -211,7 +205,7 @@ public class Character : NetworkBehaviour
             if (CharacterType == CharacterType.Virus)
                 return;
 
-            if (!isServer && isLocalPlayer && AttackStrength >= enemy.AttackStrength && !isImmune && !enemy.isImmune && !justFought)
+            if (isLocalPlayer && AttackStrength >= enemy.AttackStrength && !isImmune && !enemy.isImmune && !justFought)
             {
                 PlayEnemyDefeatAudio();
                 justFought = true;
@@ -480,6 +474,7 @@ public class Character : NetworkBehaviour
 
         yield return new WaitForSeconds(ImmunityTime);
 
+        justFought = false;
         isImmune = false;
         blinkTween.Kill();
         formSpriteRenderer.DOFade(1, 0);

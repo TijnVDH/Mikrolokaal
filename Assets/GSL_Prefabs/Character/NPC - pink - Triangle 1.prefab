@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6554801871759206472}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: bone_7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40,7 +40,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4086923999651220446}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: bone_9
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -71,7 +71,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9128548891819891028}
   - component: {fileID: 8690725119944174016}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Shadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -154,7 +154,7 @@ GameObject:
   - component: {fileID: 3446750346794072850}
   - component: {fileID: 204847558742006501}
   - component: {fileID: 1037503207573141718}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: IMG_Item
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -227,7 +227,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3881432020250728084}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: bone_4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -261,7 +261,7 @@ GameObject:
   - component: {fileID: 6718324565172349346}
   - component: {fileID: 6308655999305953086}
   - component: {fileID: 3446256546240116216}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: IMG_Item
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -338,7 +338,7 @@ GameObject:
   - component: {fileID: 393708622887277708}
   - component: {fileID: 8785627897593800110}
   - component: {fileID: 2799167908292667402}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -503,7 +503,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3642830401491687500}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: bone_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -536,7 +536,7 @@ GameObject:
   - component: {fileID: 4911352144414453914}
   - component: {fileID: 2632681595275131523}
   - component: {fileID: 2624030017900037337}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: IMG_Item
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -610,7 +610,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1131747132512950757}
   - component: {fileID: 5289788815535503847}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Slot 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -663,7 +663,7 @@ GameObject:
   m_Component:
   - component: {fileID: 373384595001318892}
   - component: {fileID: 6171133928354177249}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Food Inventory Display
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -717,7 +717,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5014793119703379903}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: bone_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -749,7 +749,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5738382606924880143}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: bone_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -782,7 +782,7 @@ GameObject:
   - component: {fileID: 2514508007144311130}
   - component: {fileID: 2816551229816240315}
   - component: {fileID: 5206933913447609933}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: IMG_Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -866,7 +866,7 @@ GameObject:
   - component: {fileID: 2878635924813814373}
   - component: {fileID: 3974552235053410321}
   - component: {fileID: 4798953232261126475}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: NPC - pink - Triangle 1
   m_TagString: Untagged
   m_Icon: {fileID: 3306451490063965843, guid: 0000000000000000d000000000000000, type: 0}
@@ -959,8 +959,22 @@ MonoBehaviour:
   UpgradedAttack: 2
   UpgradedSpeed: 0
   UpgradedSlots: 0
-  nickname: 
   nickText: {fileID: 0}
+  playerDisplayName: 
+  fivePointsPopUpField: {fileID: 0}
+  tenPointsPopUpField: {fileID: 0}
+  twentyPointsPopUpField: {fileID: 0}
+  enemyDefeat1: {fileID: 0}
+  enemyDefeat2: {fileID: 0}
+  enemyDefeat3: {fileID: 0}
+  speedUpgradePickup: {fileID: 0}
+  attackUpgradePickup: {fileID: 0}
+  carryUpgradePickup: {fileID: 0}
+  itemPickup1: {fileID: 0}
+  itemPickup2: {fileID: 0}
+  itemPickup3: {fileID: 0}
+  minimapIcon: {fileID: 0}
+  isServerCharacter: 0
 --- !u!114 &653153024778456489
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1151,7 +1165,7 @@ GameObject:
   - component: {fileID: 7665741351272523293}
   - component: {fileID: 5045659270989456213}
   - component: {fileID: 255184645765423415}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Slot 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1222,7 +1236,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6471833737466729881}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: bone_6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1254,7 +1268,7 @@ GameObject:
   - component: {fileID: 7709964518692825798}
   - component: {fileID: 9087643108276360850}
   - component: {fileID: 6500630903446527887}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: IMG_Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1327,7 +1341,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 72453600407762216}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: bone_5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1359,7 +1373,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8569741869375320416}
   - component: {fileID: 665514548389435650}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Slot 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1415,7 +1429,7 @@ GameObject:
   - component: {fileID: 4162357925771795647}
   - component: {fileID: 6976231610135407148}
   - component: {fileID: 5520516030928962644}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1542,7 +1556,7 @@ GameObject:
   - component: {fileID: 6492685034824163131}
   - component: {fileID: 8878021847615718282}
   - component: {fileID: 5781078593143743658}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: IMG_Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1615,7 +1629,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5154144187808781764}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: bone_8
   m_TagString: Untagged
   m_Icon: {fileID: 0}
