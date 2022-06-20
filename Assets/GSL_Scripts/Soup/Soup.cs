@@ -30,6 +30,10 @@ public class Soup : NetworkBehaviour
 	public SoupIndicator Indicator;
 	public int UrgentThreshold = 3;
 
+	[Header("Score")]
+	public GameObject twentyPointsPopUpField;
+	private ScoreCounter scoreScript;
+
 	[Header("Audio")]
 	public AudioClip itemDrop1;
 	public AudioClip itemDrop2;
@@ -48,6 +52,8 @@ public class Soup : NetworkBehaviour
 	public delegate void SoupContentAction(int square, int circle, int triangle);
 
 	private SoupState CurrentState;
+
+	private GameObject localPlayer;
 
 	private void Awake()
 	{
@@ -68,6 +74,8 @@ public class Soup : NetworkBehaviour
 		{
 			StartCoroutine(ConsumeFood());
 		}
+
+		scoreScript = GameObject.Find("Score").GetComponent<ScoreCounter>();
 	}
 
 	public int GetFoodCount(FoodType type)
@@ -94,6 +102,39 @@ public class Soup : NetworkBehaviour
 			NetworkServer.Destroy(food.gameObject);
 			RpcAddFood(food.FoodType, 1);
 			PlayItemDropAudio();
+
+			int soupSquares = GetFoodCount(FoodType.SQUARE);
+			int soupCircles = GetFoodCount(FoodType.CIRCLE);
+			int soupTriangles = GetFoodCount(FoodType.TRIANGLE);
+
+			switch (food.FoodType)
+			{
+				case FoodType.SQUARE:
+					{
+						if (soupSquares < soupCircles || soupSquares < soupTriangles)
+						{
+							AwardDropPoints();
+						}
+						break;
+					}
+				case FoodType.CIRCLE:
+					{
+						if (soupCircles < soupSquares || soupCircles < soupTriangles)
+						{
+							AwardDropPoints();
+						}
+						break;
+					}
+				case FoodType.TRIANGLE:
+					{
+						if (soupTriangles < soupCircles || soupTriangles < soupSquares)
+						{
+							AwardDropPoints();
+						}
+						break;
+					}
+				default: { break; }
+			}
 		}
 	}
 
@@ -299,5 +340,16 @@ public class Soup : NetworkBehaviour
 				}
 			default: break;
 		}
+	}
+
+	public void SetPlayer(GameObject player)
+    {
+		localPlayer = player;
+    }
+
+	void AwardDropPoints()
+	{
+		scoreScript.ItemDropPoints();
+		Instantiate(twentyPointsPopUpField, transform.position, Quaternion.Euler(45f, 0f, 0f));
 	}
 }

@@ -292,41 +292,6 @@ public class Character : NetworkBehaviour
     [ClientRpc]
     public void RpcDropInventory()
     {
-        int soupSquares = soupScript.GetFoodCount(FoodType.SQUARE);
-        int soupCircles = soupScript.GetFoodCount(FoodType.CIRCLE);
-        int soupTriangles = soupScript.GetFoodCount(FoodType.TRIANGLE);
-
-        foreach (FoodType fType in FoodInventory.Items)
-        {
-            switch (fType)
-            {
-                case FoodType.SQUARE:
-                    {
-                        if (soupSquares < soupCircles || soupSquares < soupTriangles)
-                        {
-                            AwardDropPoints();
-                        }
-                        break;
-                    }
-                case FoodType.CIRCLE:
-                    {
-                        if (soupCircles < soupSquares || soupCircles < soupTriangles)
-                        {
-                            AwardDropPoints();
-                        }
-                        break;
-                    }
-                case FoodType.TRIANGLE:
-                    {
-                        if (soupTriangles < soupCircles || soupTriangles < soupSquares)
-                        {
-                            AwardDropPoints();
-                        }
-                        break;
-                    }
-                default: { break; }
-            }
-        }
         FoodInventory.DropAll();
         FoodInventoryDisplay.ResetSprites();
     }
