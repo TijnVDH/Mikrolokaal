@@ -5,6 +5,7 @@ using System.Linq;
 using Mirror;
 using UnityEngine;
 using TMPro;
+using UnityEngine.U2D.Animation;
 
 // Only functions that are used by the player/virus controller
 [RequireComponent(typeof(NetworkTransform))]
@@ -34,6 +35,7 @@ public class Character : NetworkBehaviour
     [Header("Forms")]
     [SerializeField] private SpriteRenderer formSpriteRenderer;
     [SerializeField] private List<CharacterForm> forms; // forms should be sorted by priority
+    [SerializeField] private List<SpriteSkin> spriteSkin;
 
     [Header("Movement")]
     public TouchMovement Movement;

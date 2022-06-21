@@ -951,6 +951,7 @@ MonoBehaviour:
   - Name: Aanvaller
     Sprite: {fileID: 21300000, guid: 09d81e8e3784bde43ac2ffe679c4c7eb, type: 3}
     UpgradeType: 1
+  spriteSkin: []
   Movement: {fileID: 0}
   WobbleHeightStrength: 1.05
   WobbleWidthStrength: 1.1
@@ -959,9 +960,8 @@ MonoBehaviour:
   UpgradedAttack: 2
   UpgradedSpeed: 0
   UpgradedSlots: 0
+  nickname: 
   nickText: {fileID: 0}
-  nickName: 0
-  animator: {fileID: 0}
 --- !u!114 &653153024778456489
 MonoBehaviour:
   m_ObjectHideFlags: 0
