@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Mirror;
 using UnityEngine;
-using TMPro;
 
 // Only functions that are used by the player/virus controller
 [RequireComponent(typeof(NetworkTransform))]
@@ -47,64 +46,19 @@ public class Character : NetworkBehaviour
     public float UpgradedSpeed;
     public int UpgradedSlots;
 
-    [Header("Nickname")]
-    //[SyncVar] public string nickname;
-    [SerializeField] private TMP_Text nickText;
-    [SyncVar(hook = "DisplayPlayerName")] public string playerDisplayName;
-
-    [Header("Score")]
-    public GameObject fivePointsPopUpField;
-    public GameObject tenPointsPopUpField;
-    public GameObject twentyPointsPopUpField;
-    private ScoreCounter scoreScript;
-
     private float defaultAttack;
     private float defaultSpeed;
     private int defaultSlots;
 
-    [Header("Audio")]
-    public AudioClip enemyDefeat1;
-    public AudioClip enemyDefeat2;
-    public AudioClip enemyDefeat3;
-    public AudioClip speedUpgradePickup;
-    public AudioClip attackUpgradePickup;
-    public AudioClip carryUpgradePickup;
-    public AudioClip itemPickup1;
-    public AudioClip itemPickup2;
-    public AudioClip itemPickup3;
-
-    AudioSource audioSrc;
-
-    bool justFought = false;
-
-    public GameObject minimapIcon;
-
-    GameObject minimap;
-    GameObject minimapCamera;
-
-    // Soup
-    private GameObject soup;
-    private Soup soupScript;
-
     // combat
     private bool isImmune = false;
+
     private List<Tween> wobbleTweens = new List<Tween>();
-    [SyncVar] public bool isServerCharacter = false;
+
+    [SyncVar] private bool isServerCharacter = false;
 
     public void Awake()
     {
-        if (CharacterType == CharacterType.Player)
-        {
-            // add an audiolistener to the local scene
-            GameObject.Find("Camera").AddComponent(typeof(AudioListener));
-
-            audioSrc = GameObject.Find("Camera").GetComponent<AudioSource>();
-        }
-
-        soup = GameObject.Find("Soup");
-        soupScript = soup.GetComponent<Soup>();
-        scoreScript = GameObject.Find("Score").GetComponent<ScoreCounter>();
-
         defaultAttack = AttackStrength;
         defaultSlots = InventorySlots;
         defaultSpeed = MovementSpeed;
@@ -131,13 +85,13 @@ public class Character : NetworkBehaviour
 
         if (Movement != null)
         {
-            Movement.OnStartMoving += StartWobble;
+            /* Movement.OnStartMoving += StartWobble;
             Movement.OnStopMoving += StopWobble;
-            Movement.OnMove += SetSpriteFacing;
+            Movement.OnMove += SetSpriteFacing; */
         }
         else
         {
-            StartWobble();
+            // StartWobble();
         }
 
         // initialise form
@@ -165,23 +119,12 @@ public class Character : NetworkBehaviour
             InventorySlots = FoodInventory.CurrentSlotsAmount;
         }
 
-        if (isServerCharacter)
-        {
+        if(isServerCharacter) {
             HideCharacter();
-        }
-
-        // minimap
-        minimap = GameObject.Find("MinimapWindow");
-        minimapCamera = GameObject.Find("Minimap Camera");
-        if (CharacterType == CharacterType.Player && !isServer && isLocalPlayer)
-        {
-            minimapIcon = gameObject.transform.Find("Minimap Sprite").gameObject;
-            minimapCamera.GetComponent<Minimap>().SetPlayer(gameObject);
         }
     }
 
-    private void HideCharacter()
-    {
+    private void HideCharacter() {
         foreach (Renderer renderer in GetComponentsInChildren<Renderer>())
         {
             renderer.enabled = false;
@@ -196,7 +139,6 @@ public class Character : NetworkBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-
         // colliding with a character?
         Character enemy = collision.gameObject.GetComponent<Character>();
         if (enemy != null)
@@ -205,48 +147,31 @@ public class Character : NetworkBehaviour
             if (CharacterType == CharacterType.Virus)
                 return;
 
-            if (isLocalPlayer && AttackStrength >= enemy.AttackStrength && !isImmune && !enemy.isImmune && !justFought)
-            {
-                PlayEnemyDefeatAudio();
-                justFought = true;
-            }
             Fight(enemy);
         }
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
+    private void OnTriggerEnter(Collider other) {
         // only handle triggers from the local player
-        if (!isLocalPlayer) return;
+        if(!isLocalPlayer) return;
 
         // colliding with food?
         Food food = other.gameObject.GetComponent<Food>();
-        if (food != null)
+        if (food != null) 
         {
             // ask the server to handle the pickup
             CmdPickUpFood(food);
-
-            if (FoodInventory.HasSpace())
-            {
-                //pickup food sound effect
-                PlayItemPickupAudio();
-            }
         }
 
         Upgrader upgrader = other.gameObject.GetComponent<Upgrader>();
-        if (upgrader != null)
+        if (upgrader != null) 
         {
             // ask the server to handle the upgrade
             CmdUpgrade(upgrader.UpgradeType);
-
-            //play upgrade sound effect
-            if (upgrader.UpgradeType != ActiveUpgrade)
-                PlayUpgradeAudio(upgrader.UpgradeType);
         }
     }
 
-    [Command]
-    public void CmdPickUpFood(Food food)
+    [Command] public void CmdPickUpFood(Food food)
     {
         // when two players collide with food simultaneously it might ask the server to pick up
         // food that was already destroyed on the server side, but hasn't synced to client side yet 
@@ -256,8 +181,7 @@ public class Character : NetworkBehaviour
             return;
         }
 
-        if (FoodInventory.HasSpace())
-        {
+        if (FoodInventory.HasSpace()) {
             // destroy food object on all clients
             NetworkServer.Destroy(food.gameObject);
 
@@ -266,57 +190,47 @@ public class Character : NetworkBehaviour
         }
     }
 
-    [ClientRpc]
-    public void RpcAddToInventory(FoodType food)
+    [ClientRpc] public void RpcAddToInventory(FoodType food) 
     {
-        if (FoodInventory.HasSpace())
-        {
+        if (FoodInventory.HasSpace()) {
             FoodInventory.AddToInventory(food);
             FoodInventoryDisplay.AddItem(food);
         }
     }
 
-    public void DropInventory()
+    public void DropInventory() 
     {
         // ask server to handle dropping inventory
         CmdDropInventory();
     }
 
-    [Command]
-    public void CmdDropInventory()
+    [Command] public void CmdDropInventory() 
     {
         // tell all clients that this character needs to drop it's inventory
         RpcDropInventory();
     }
 
-    [ClientRpc]
-    public void RpcDropInventory()
+    [ClientRpc] public void RpcDropInventory() 
     {
         FoodInventory.DropAll();
         FoodInventoryDisplay.ResetSprites();
     }
 
-    [Command]
-    public void CmdUpgrade(UpgradeType newUpgrade)
+    [Command] public void CmdUpgrade(UpgradeType newUpgrade) 
     {
         RpcUpgrade(newUpgrade);
     }
 
-    [ClientRpc]
-    public void RpcUpgrade(UpgradeType newUpgrade)
+    [ClientRpc] public void RpcUpgrade(UpgradeType newUpgrade) 
     {
-        UpgradeType lastUpdate = ActiveUpgrade;
         ActiveUpgrade = newUpgrade;
         AttackStrength = newUpgrade.Equals(UpgradeType.ATTACK) ? UpgradedAttack : defaultAttack;
         MovementSpeed = newUpgrade.Equals(UpgradeType.SPEED) ? UpgradedSpeed : defaultSpeed;
         ChangeInventorySlots(newUpgrade.Equals(UpgradeType.CARRY) ? UpgradedSlots : defaultSlots);
         ChangeForm();
-        if (CharacterType == CharacterType.Player && lastUpdate != newUpgrade) 
-            AwardUpgradePoints();
     }
 
-    public void ChangeInventorySlots(int newAmount)
-    {
+    public void ChangeInventorySlots(int newAmount) {
         FoodInventory.ChangeSlotsAmount(newAmount);
         FoodInventoryDisplay.ResetSprites();
         foreach (FoodType food in FoodInventory.Items)
@@ -324,6 +238,7 @@ public class Character : NetworkBehaviour
             FoodInventoryDisplay.AddItem(food);
         }
     }
+
 
     public void Fight(Character enemy)
     {
@@ -354,8 +269,6 @@ public class Character : NetworkBehaviour
                 npc.RemoveFromSpawner();
             }
             NetworkServer.Destroy(enemy.gameObject);
-
-            RpcAwardDefeatpoints();
         }
 
         // Set immune for x seconds
@@ -380,8 +293,7 @@ public class Character : NetworkBehaviour
         // i dunno, that comes later
     }
 
-    private void SetSpriteFacing(Vector3 moveDirection)
-    {
+    private void SetSpriteFacing(Vector3 moveDirection) {
         formSpriteRenderer.flipX = moveDirection.x < 0;
     }
 
@@ -427,8 +339,8 @@ public class Character : NetworkBehaviour
         {
             tween.Kill();
         }
-
         wobbleTweens.Clear();
+
         spriteTransform.localScale = Vector3.one;
     }
 
@@ -439,145 +351,8 @@ public class Character : NetworkBehaviour
 
         yield return new WaitForSeconds(ImmunityTime);
 
-        justFought = false;
         isImmune = false;
         blinkTween.Kill();
         formSpriteRenderer.DOFade(1, 0);
-    }
-
-    public override void OnStartClient()
-    {
-        CmdSendName(GameObject.FindGameObjectWithTag("Nickname_Dropdown").transform.GetComponent<NickNameHolderScript>().NickName);
-    }
-
-    [Command]
-    public void CmdSendName(string playerName)
-    {
-        playerDisplayName = playerName;
-        DisplayPlayerName("Old", playerDisplayName);
-    }
-
-    public void DisplayPlayerName(string oldName, string newName)
-    {
-        nickText.text = newName;
-        if (isServer)
-            nickText.text = "";
-    }
-
-    [ClientRpc]
-    public void RpcAwardDefeatpoints()
-    {
-        AwardDefeatPoints();
-    }
-
-    void AwardDropPoints()
-    {
-        scoreScript.ItemDropPoints();
-        Instantiate(twentyPointsPopUpField, transform.position, Quaternion.Euler(45f, 0f, 0f));
-    }
-
-    void AwardDefeatPoints()
-    {
-        scoreScript.EnemyDefeatPoints();
-        Instantiate(tenPointsPopUpField, transform.position, Quaternion.Euler(45f, 0f, 0f));
-    }
-
-    void AwardUpgradePoints()
-    {
-        scoreScript.UpgradePickupPoints();
-        Instantiate(fivePointsPopUpField, transform.position, Quaternion.Euler(45f, 0f, 0f));
-    }
-
-    // public methods to play audio clips
-
-    // play a random 1 out of 3 different enemy defeat sounds
-    public void PlayEnemyDefeatAudio()
-    {
-        Debug.Log("in audio");
-        if (CharacterType != CharacterType.Player)
-            return;
-
-
-        if (isServer)
-        {
-            Debug.Log("server in audio method");
-            return;
-        }
-
-        int clip = Random.Range(0, 2);
-        switch (clip)
-        {
-            case 0:
-                {
-                    audioSrc.PlayOneShot(enemyDefeat1, 1);
-                    break;
-                }
-            case 1:
-                {
-                    audioSrc.PlayOneShot(enemyDefeat2, 1);
-                    break;
-                }
-            case 2:
-                {
-                    audioSrc.PlayOneShot(enemyDefeat3, 1);
-                    break;
-                }
-            default: break;
-        }
-    }
-
-    // play a random 1 out of 3 different item pickup sounds
-    public void PlayItemPickupAudio()
-    {
-        if (CharacterType != CharacterType.Player)
-            return;
-
-        int clip = Random.Range(0, 2);
-        switch (clip)
-        {
-            case 0:
-                {
-                    audioSrc.PlayOneShot(itemPickup1, 1);
-                    break;
-                }
-            case 1:
-                {
-                    audioSrc.PlayOneShot(itemPickup2, 1);
-                    break;
-                }
-            case 2:
-                {
-                    audioSrc.PlayOneShot(itemPickup3, 1);
-                    break;
-                }
-            default: break;
-        }
-    }
-
-    // plays the appropriate upgrade sound effect based on the type of the upgrade
-    public void PlayUpgradeAudio(UpgradeType upgradeType)
-    {
-        if (CharacterType != CharacterType.Player)
-            return;
-
-        switch (upgradeType)
-        {
-            case UpgradeType.SPEED:
-                {
-                    audioSrc.PlayOneShot(speedUpgradePickup, 1);
-                    break;
-                }
-            case UpgradeType.CARRY:
-                {
-                    audioSrc.PlayOneShot(carryUpgradePickup, 1);
-                    break;
-                }
-            case UpgradeType.ATTACK:
-                {
-                    audioSrc.PlayOneShot(attackUpgradePickup, 1);
-                    break;
-                }
-            default: break;
-        }
     }
 }

@@ -12,12 +12,6 @@ PrefabInstance:
       propertyPath: UpgradeType
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 4588063635018087881, guid: bef0e6575057db640b54b723b7d7d188,
-        type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 862cf11f618dae64c90fbd21e2c86255,
-        type: 3}
     - target: {fileID: 5323516226656275293, guid: bef0e6575057db640b54b723b7d7d188,
         type: 3}
       propertyPath: m_RootOrder
@@ -92,7 +86,7 @@ PrefabInstance:
     - target: {fileID: 9147105301955430391, guid: bef0e6575057db640b54b723b7d7d188,
         type: 3}
       propertyPath: m_Name
-      value: Upgrader - Attack Variant
+      value: Upgrader - Strength Variant
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bef0e6575057db640b54b723b7d7d188, type: 3}

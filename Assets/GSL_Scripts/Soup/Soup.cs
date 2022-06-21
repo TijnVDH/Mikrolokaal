@@ -7,8 +7,8 @@ using UnityEngine;
 public class Soup : NetworkBehaviour
 {
 	[Header("Config")]
-	public int MinimumFoodCount;
-	public float ConsumeRate;
+    public int MinimumFoodCount;
+    public float ConsumeRate;
 	public int AllowedFoodDifference;
 	public List<FoodType> RequiredFoodTypes;
 
@@ -30,20 +30,9 @@ public class Soup : NetworkBehaviour
 	public SoupIndicator Indicator;
 	public int UrgentThreshold = 3;
 
-	[Header("Score")]
-	public GameObject twentyPointsPopUpField;
-	private ScoreCounter scoreScript;
-
-	[Header("Audio")]
-	public AudioClip itemDrop1;
-	public AudioClip itemDrop2;
-	public AudioClip itemDrop3;
-	public GameObject audioPlace;
-	AudioSource audioSrc;
-
 	public int MaxFoodDifference { get => soupContent.Values.Max() - soupContent.Values.Min(); }
 
-	public Dictionary<FoodType, int> soupContent = new Dictionary<FoodType, int>();
+	private Dictionary<FoodType, int> soupContent = new Dictionary<FoodType, int>();
 
 	public static SoupStateAction OnStateChange;
 	public delegate void SoupStateAction(SoupState state);
@@ -52,13 +41,6 @@ public class Soup : NetworkBehaviour
 	public delegate void SoupContentAction(int square, int circle, int triangle);
 
 	private SoupState CurrentState;
-
-	private GameObject localPlayer;
-
-	private void Awake()
-	{
-		audioSrc = audioPlace.GetComponent<AudioSource>();
-	}
 
 	private void Start()
 	{
@@ -74,8 +56,6 @@ public class Soup : NetworkBehaviour
 		{
 			StartCoroutine(ConsumeFood());
 		}
-
-		scoreScript = GameObject.Find("Score").GetComponent<ScoreCounter>();
 	}
 
 	public int GetFoodCount(FoodType type)
@@ -90,56 +70,20 @@ public class Soup : NetworkBehaviour
 		}
 	}
 
-	private void OnTriggerEnter(Collider other)
-	{
+	private void OnTriggerEnter(Collider other) {
 
 		// only the server triggers the trigger
 		if (!isServer) return;
 
 		Food food = other.gameObject.GetComponent<Food>();
-		if (food != null)
+		if (food != null) 
 		{
 			NetworkServer.Destroy(food.gameObject);
 			RpcAddFood(food.FoodType, 1);
-			PlayItemDropAudio();
-
-			int soupSquares = GetFoodCount(FoodType.SQUARE);
-			int soupCircles = GetFoodCount(FoodType.CIRCLE);
-			int soupTriangles = GetFoodCount(FoodType.TRIANGLE);
-
-			switch (food.FoodType)
-			{
-				case FoodType.SQUARE:
-					{
-						if (soupSquares < soupCircles || soupSquares < soupTriangles)
-						{
-							AwardDropPoints();
-						}
-						break;
-					}
-				case FoodType.CIRCLE:
-					{
-						if (soupCircles < soupSquares || soupCircles < soupTriangles)
-						{
-							AwardDropPoints();
-						}
-						break;
-					}
-				case FoodType.TRIANGLE:
-					{
-						if (soupTriangles < soupCircles || soupTriangles < soupSquares)
-						{
-							AwardDropPoints();
-						}
-						break;
-					}
-				default: { break; }
-			}
 		}
 	}
 
-	[ClientRpc]
-	public void RpcAddFood(FoodType type, int amount)
+	[ClientRpc] public void RpcAddFood(FoodType type, int amount)
 	{
 		if (!RequiredFoodTypes.Contains(type))
 		{
@@ -169,8 +113,7 @@ public class Soup : NetworkBehaviour
 		if (isServer) UpdateHostIndicators();
 	}
 
-	[ClientRpc]
-	public void RpcRemoveFood(FoodType type, int amount)
+	[ClientRpc] public void RpcRemoveFood(FoodType type, int amount)
 	{
 		Debug.Log("soup: removing food " + type);
 		if (soupContent.ContainsKey(type))
@@ -234,8 +177,7 @@ public class Soup : NetworkBehaviour
 		}
 	}
 
-	private void AnimateBubbles()
-	{
+	private void AnimateBubbles() {
 		SurfaceBubbleParticles.Emit(Random.Range(MinSurfaceBubbleCount, MaxSurfaceBubbleCount));
 		RisingBubbleParticles.Emit(Random.Range(MinRisingBubbleCount, MaxRisingBubbleCount));
 	}
@@ -275,12 +217,12 @@ public class Soup : NetworkBehaviour
 		if (soupContent.ContainsKey(foodType))
 		{
 			return soupContent.Values.Max() - soupContent[foodType];
-		}
+		} 
 		else
 		{
 			if (soupContent.Count > 0)
 				return soupContent.Values.Max();
-			else
+			else 
 				return 0;
 		}
 	}
@@ -310,46 +252,5 @@ public class Soup : NetworkBehaviour
 		}
 
 		OnStateChange(newState);
-	}
-
-	public Dictionary<FoodType, int> getSoupContents()
-	{
-		return soupContent;
-	}
-
-	// play a random 1 out of 3 different item drop sounds
-	public void PlayItemDropAudio()
-	{
-		int clip = Random.Range(0, 2);
-		switch (clip)
-		{
-			case 0:
-				{
-					audioSrc.PlayOneShot(itemDrop1, 1);
-					break;
-				}
-			case 1:
-				{
-					audioSrc.PlayOneShot(itemDrop2, 1);
-					break;
-				}
-			case 2:
-				{
-					audioSrc.PlayOneShot(itemDrop3, 1);
-					break;
-				}
-			default: break;
-		}
-	}
-
-	public void SetPlayer(GameObject player)
-    {
-		localPlayer = player;
-    }
-
-	void AwardDropPoints()
-	{
-		scoreScript.ItemDropPoints();
-		Instantiate(twentyPointsPopUpField, transform.position, Quaternion.Euler(45f, 0f, 0f));
 	}
 }
