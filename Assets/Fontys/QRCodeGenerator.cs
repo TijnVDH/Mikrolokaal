@@ -12,8 +12,7 @@ public class QRCodeGenerator : NetworkBehaviour
     [SerializeField]
     private RawImage _rawImageReceiver;
 
-    [SyncVar]
-    public string new_ip;
+    [SyncVar(hook = "doEncode")] public string new_ip;
 
     private const string PLAYER_PREFS_IP = "hostIP";
 
@@ -26,15 +25,15 @@ public class QRCodeGenerator : NetworkBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        new_ip = CL.GetIPv4();
-        string[] _ipv1x4 = new_ip.Split('.');
+        string ip = CL.GetIPv4();
+        string[] _ipv1x4 = ip.Split('.');
         new_ip = CL.IPv4EncodeToPass(_ipv1x4).ToString("X");
         _storeEncodedTexture = new Texture2D(256, 256);
         ipText.text = new_ip;
         EncodeTextToQRCode();
     }
 
-    private Color32 [] Encode(string textForEncoding, int width, int height)
+    private Color32[] Encode(string textForEncoding, int width, int height)
     {
         BarcodeWriter writer = new BarcodeWriter
         {
@@ -66,25 +65,22 @@ public class QRCodeGenerator : NetworkBehaviour
 
     public override void OnStartClient()
     {
-        get_ip();
+        CmdGetip();
         Debug.Log("qr client connected");
     }
 
-    [Command(requiresAuthority = false)]
-    public void get_ip()
+    [Command]
+    public void CmdGetip()
     {
-        new_ip = CL.GetIPv4();
-        string[] _ipv1x4 = new_ip.Split('.');
+        string ipv4 = CL.GetIPv4();
+        string[] _ipv1x4 = ipv4.Split('.');
         new_ip = CL.IPv4EncodeToPass(_ipv1x4).ToString("X");
-        RpcSend_ip(new_ip);
-        Debug.Log(new_ip);
+        doEncode("old", new_ip);
     }
 
-    [ClientRpc]
-    public void RpcSend_ip(string _result)
+    void doEncode(string oldip, string newip)
     {
-        new_ip = _result;
-        Debug.Log(_result);
+        new_ip = newip;
         ipText.text = new_ip;
         _storeEncodedTexture = new Texture2D(256, 256);
         EncodeTextToQRCode();

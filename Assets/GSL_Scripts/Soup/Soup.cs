@@ -53,7 +53,7 @@ public class Soup : NetworkBehaviour
 
 	private SoupState CurrentState;
 
-	private GameObject localPlayer;
+	[SyncVar] private bool addedByCharacter = false;
 
 	private void Awake()
 	{
@@ -62,6 +62,7 @@ public class Soup : NetworkBehaviour
 
 	private void Start()
 	{
+		
 		CurrentState = SoupState.INACTIVE;
 		SoupSprite.sprite = InactiveSoupSprite;
 
@@ -102,39 +103,7 @@ public class Soup : NetworkBehaviour
 			NetworkServer.Destroy(food.gameObject);
 			RpcAddFood(food.FoodType, 1);
 			PlayItemDropAudio();
-
-			int soupSquares = GetFoodCount(FoodType.SQUARE);
-			int soupCircles = GetFoodCount(FoodType.CIRCLE);
-			int soupTriangles = GetFoodCount(FoodType.TRIANGLE);
-
-			switch (food.FoodType)
-			{
-				case FoodType.SQUARE:
-					{
-						if (soupSquares < soupCircles || soupSquares < soupTriangles)
-						{
-							AwardDropPoints();
-						}
-						break;
-					}
-				case FoodType.CIRCLE:
-					{
-						if (soupCircles < soupSquares || soupCircles < soupTriangles)
-						{
-							AwardDropPoints();
-						}
-						break;
-					}
-				case FoodType.TRIANGLE:
-					{
-						if (soupTriangles < soupCircles || soupTriangles < soupSquares)
-						{
-							AwardDropPoints();
-						}
-						break;
-					}
-				default: { break; }
-			}
+			addedByCharacter = true;
 		}
 	}
 
@@ -147,6 +116,47 @@ public class Soup : NetworkBehaviour
 			return;
 		}
 
+		if (addedByCharacter)
+		{
+			int soupSquares = GetFoodCount(FoodType.SQUARE);
+			int soupCircles = GetFoodCount(FoodType.CIRCLE);
+			int soupTriangles = GetFoodCount(FoodType.TRIANGLE);
+
+			for (int i = 0; i < amount; i++)
+			{
+				switch (type)
+				{
+					case FoodType.SQUARE:
+						{
+							if (soupSquares < soupCircles || soupSquares < soupTriangles)
+							{
+								RpcAwardDropPoints();
+							}
+							break;
+						}
+					case FoodType.CIRCLE:
+						{
+							if (soupCircles < soupSquares || soupCircles < soupTriangles)
+							{
+								RpcAwardDropPoints();
+							}
+							break;
+						}
+					case FoodType.TRIANGLE:
+						{
+							if (soupTriangles < soupCircles || soupTriangles < soupSquares)
+							{
+								RpcAwardDropPoints();
+							}
+							break;
+						}
+					default: { break; }
+				}
+			}
+
+			addedByCharacter = false;
+		}
+
 		if (soupContent.ContainsKey(type))
 		{
 			soupContent[type] += amount;
@@ -155,6 +165,8 @@ public class Soup : NetworkBehaviour
 		{
 			soupContent.Add(type, amount);
 		}
+
+		
 
 		Debug.Log("==SOUP CONTENT==");
 		foreach (KeyValuePair<FoodType, int> foodkvp in soupContent)
@@ -342,12 +354,15 @@ public class Soup : NetworkBehaviour
 		}
 	}
 
-	public void SetPlayer(GameObject player)
+
+	[Command]
+	void CmdAwardDropPoints()
     {
-		localPlayer = player;
+		RpcAwardDropPoints();
     }
 
-	void AwardDropPoints()
+	[ClientRpc]
+	void RpcAwardDropPoints()
 	{
 		scoreScript.ItemDropPoints();
 		Instantiate(twentyPointsPopUpField, transform.position, Quaternion.Euler(45f, 0f, 0f));
