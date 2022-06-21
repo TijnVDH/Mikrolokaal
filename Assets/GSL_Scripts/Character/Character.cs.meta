@@ -3,7 +3,27 @@ guid: 5affaa77f3a6e2f44993fecee6cc3087
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - FoodInventory: {instanceID: 0}
+  - FoodInventoryDisplay: {instanceID: 0}
+  - formSpriteRenderer: {instanceID: 0}
+  - Movement: {instanceID: 0}
+  - nickText: {instanceID: 0}
+  - fivePointsPopUpField: {instanceID: 0}
+  - tenPointsPopUpField: {instanceID: 0}
+  - twentyPointsPopUpField: {instanceID: 0}
+  - enemyDefeat1: {fileID: 8300000, guid: a245ac773194142cfa12c21de3e0980b, type: 3}
+  - enemyDefeat2: {fileID: 8300000, guid: a245ac773194142cfa12c21de3e0980b, type: 3}
+  - enemyDefeat3: {fileID: 8300000, guid: a245ac773194142cfa12c21de3e0980b, type: 3}
+  - speedUpgradePickup: {fileID: 8300000, guid: a245ee5d75348c84a89ffb7992f1dc82,
+      type: 3}
+  - attackUpgradePickup: {fileID: 8300000, guid: 21ba4f1a293a2487587068d7bbe15106,
+      type: 3}
+  - carryUpgradePickup: {fileID: 8300000, guid: 5e1a9f876d3dafd47bc6b3dde25135fa,
+      type: 3}
+  - itemPickup1: {fileID: 8300000, guid: 792a6e132d38a4f70bbae7f091a6cab3, type: 3}
+  - itemPickup2: {fileID: 8300000, guid: 792a6e132d38a4f70bbae7f091a6cab3, type: 3}
+  - itemPickup3: {fileID: 8300000, guid: 792a6e132d38a4f70bbae7f091a6cab3, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

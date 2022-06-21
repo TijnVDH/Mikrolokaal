@@ -19,7 +19,7 @@ GameObject:
   - component: {fileID: 8995131033628767077}
   - component: {fileID: 6397908899655324272}
   - component: {fileID: 5193629017359998980}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: NPC
   m_TagString: Untagged
   m_Icon: {fileID: 3306451490063965843, guid: 0000000000000000d000000000000000, type: 0}
@@ -112,6 +112,24 @@ MonoBehaviour:
   UpgradedAttack: 2
   UpgradedSpeed: 0
   UpgradedSlots: 0
+  nickText: {fileID: 0}
+  playerDisplayName: 
+  fivePointsPopUpField: {fileID: 5297729869637324723, guid: 1630c9c5c26fe9b48b4c7b08951a240f,
+    type: 3}
+  tenPointsPopUpField: {fileID: 1477677413811398437, guid: a72adc63b35d65248aff6b339b3da56c,
+    type: 3}
+  twentyPointsPopUpField: {fileID: 7998818311424257209, guid: 9f67cd5d16ce8b248aaefe673e0bfc87,
+    type: 3}
+  enemyDefeat1: {fileID: 8300000, guid: a245ac773194142cfa12c21de3e0980b, type: 3}
+  enemyDefeat2: {fileID: 8300000, guid: a245ac773194142cfa12c21de3e0980b, type: 3}
+  enemyDefeat3: {fileID: 8300000, guid: a245ac773194142cfa12c21de3e0980b, type: 3}
+  speedUpgradePickup: {fileID: 8300000, guid: a245ee5d75348c84a89ffb7992f1dc82, type: 3}
+  attackUpgradePickup: {fileID: 8300000, guid: 21ba4f1a293a2487587068d7bbe15106, type: 3}
+  carryUpgradePickup: {fileID: 8300000, guid: 5e1a9f876d3dafd47bc6b3dde25135fa, type: 3}
+  itemPickup1: {fileID: 8300000, guid: 792a6e132d38a4f70bbae7f091a6cab3, type: 3}
+  itemPickup2: {fileID: 8300000, guid: 792a6e132d38a4f70bbae7f091a6cab3, type: 3}
+  itemPickup3: {fileID: 8300000, guid: 792a6e132d38a4f70bbae7f091a6cab3, type: 3}
+  minimapIcon: {fileID: 0}
 --- !u!114 &-708332778737580612
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -130,6 +148,7 @@ MonoBehaviour:
   Soup: {fileID: 0}
   spawner: {fileID: 0}
   path: {fileID: 5193629017359998980}
+  animator: {fileID: 0}
 --- !u!114 &3896224705254133228
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -281,8 +300,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8800085966129580326}
   - component: {fileID: 2594537822226225612}
-  - component: {fileID: 8424694276563884777}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -344,36 +362,17 @@ SpriteRenderer:
   m_SortingLayerID: -1572423305
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 09d81e8e3784bde43ac2ffe679c4c7eb, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e373df54ba4ce504f8b76a3fbf6f7e9b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 6.43, y: 5}
+  m_Size: {x: 2.94, y: 3.48}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!95 &8424694276563884777
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6630677306310370204}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &8218626627794037521
 GameObject:
   m_ObjectHideFlags: 0
@@ -384,7 +383,7 @@ GameObject:
   m_Component:
   - component: {fileID: 113741153702334785}
   - component: {fileID: 549615434553795029}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Shadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -463,6 +462,46 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8800085966129580326}
     m_Modifications:
+    - target: {fileID: 548784379949401453, guid: d6c4dc29aa071584680f190f13bbbd95,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1567815576995236264, guid: d6c4dc29aa071584680f190f13bbbd95,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2290223063215430482, guid: d6c4dc29aa071584680f190f13bbbd95,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3775217467399452180, guid: d6c4dc29aa071584680f190f13bbbd95,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4058161601290708652, guid: d6c4dc29aa071584680f190f13bbbd95,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4116499456303271475, guid: d6c4dc29aa071584680f190f13bbbd95,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4751107783101182787, guid: d6c4dc29aa071584680f190f13bbbd95,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5644517989084162843, guid: d6c4dc29aa071584680f190f13bbbd95,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 6261293169533200928, guid: d6c4dc29aa071584680f190f13bbbd95,
         type: 3}
       propertyPath: m_RootOrder
@@ -518,10 +557,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7352391535313330813, guid: d6c4dc29aa071584680f190f13bbbd95,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7530407803257112440, guid: d6c4dc29aa071584680f190f13bbbd95,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 8019397078089882377, guid: d6c4dc29aa071584680f190f13bbbd95,
         type: 3}
       propertyPath: m_Name
       value: Food Inventory Display
+      objectReference: {fileID: 0}
+    - target: {fileID: 8019397078089882377, guid: d6c4dc29aa071584680f190f13bbbd95,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d6c4dc29aa071584680f190f13bbbd95, type: 3}
