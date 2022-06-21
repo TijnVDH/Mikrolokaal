@@ -5313,6 +5313,7 @@ GameObject:
   - component: {fileID: 5553633832817660804}
   - component: {fileID: 2552365905211957095}
   - component: {fileID: 2980502838545383298}
+  - component: {fileID: 7223940113039425192}
   m_Layer: 0
   m_Name: Soup
   m_TagString: Untagged
@@ -5455,6 +5456,20 @@ CapsuleCollider:
   m_Height: 25
   m_Direction: 0
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &7223940113039425192
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5553633832817660805}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ba7a8131ffdbd9468c78f13cc8e4c84, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
 --- !u!1 &6709597332168117899
 GameObject:
   m_ObjectHideFlags: 0
