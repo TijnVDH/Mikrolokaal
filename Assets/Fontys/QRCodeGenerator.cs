@@ -25,12 +25,12 @@ public class QRCodeGenerator : NetworkBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        string ip = CL.GetIPv4();
+        /*string ip = CL.GetIPv4();
         string[] _ipv1x4 = ip.Split('.');
         new_ip = CL.IPv4EncodeToPass(_ipv1x4).ToString("X");
         _storeEncodedTexture = new Texture2D(256, 256);
         ipText.text = new_ip;
-        EncodeTextToQRCode();
+        EncodeTextToQRCode();*/
     }
 
     private Color32[] Encode(string textForEncoding, int width, int height)
@@ -65,12 +65,12 @@ public class QRCodeGenerator : NetworkBehaviour
 
     public override void OnStartClient()
     {
-        CmdGetip();
+        CmdGetIp();
         Debug.Log("qr client connected");
     }
 
-    [Command]
-    public void CmdGetip()
+    [Command(requiresAuthority = false)]
+    public void CmdGetIp()
     {
         string ipv4 = CL.GetIPv4();
         string[] _ipv1x4 = ipv4.Split('.');
@@ -80,8 +80,7 @@ public class QRCodeGenerator : NetworkBehaviour
 
     void doEncode(string oldip, string newip)
     {
-        new_ip = newip;
-        ipText.text = new_ip;
+        ipText.text = newip;
         _storeEncodedTexture = new Texture2D(256, 256);
         EncodeTextToQRCode();
     }
